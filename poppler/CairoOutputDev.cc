@@ -228,6 +228,10 @@ void CairoOutputDev::updateFont(GfxState *state) {
   m11 *= state->getHorizScaling();
   m12 *= state->getHorizScaling();
 
+  w = currentFont->getSubstitutionCorrection(state->getFont());
+  m12 *= w;
+  m22 *= w;
+
   LOG(printf ("font matrix: %f %f %f %f\n", m11, m12, m21, m22));
   
   font_face = currentFont->getFontFace();
@@ -260,14 +264,14 @@ void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
       j = 1;
       while (j < subpath->getNumPoints()) {
 	if (subpath->getCurve(j)) {
+	  state->transform(subpath->getX(j), subpath->getY(j), &x1, &y1);
+	  state->transform(subpath->getX(j+1), subpath->getY(j+1), &x2, &y2);
+	  state->transform(subpath->getX(j+2), subpath->getY(j+2), &x3, &y3);
 	  if (snapToGrid) {
 	    x1 = round (x1); y1 = round (y1);
 	    x2 = round (x2); y2 = round (y2);
 	    x3 = round (x3); y3 = round (y3);
 	  }
-	  state->transform(subpath->getX(j), subpath->getY(j), &x1, &y1);
-	  state->transform(subpath->getX(j+1), subpath->getY(j+1), &x2, &y2);
-	  state->transform(subpath->getX(j+2), subpath->getY(j+2), &x3, &y3);
 	  cairo_curve_to (cairo, 
 			  x1, y1,
 			  x2, y2,
