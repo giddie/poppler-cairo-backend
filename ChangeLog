@@ -1,3 +1,9 @@
+2005-08-06  Kristian Høgsberg  <krh@redhat.com>
+
+	* glib/poppler-page.cc:
+	* glib/poppler-page.h: Use GdkColor for specifying selection
+	colors, we alreay depend on GDK anyway.
+
 2005-08-05  Kristian Høgsberg  <krh@redhat.com>
 
 	* poppler/TextOutputDev.cc (visitLine): Round selection
