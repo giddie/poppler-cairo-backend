@@ -1,3 +1,17 @@
+2005-08-16  Kristian Høgsberg  <krh@redhat.com>
+
+	* configure.ac: Bump version to 0.4.0.
+
+	* NEWS: Sum up changes.
+
+	* poppler/PDFDoc.cc: Add extended check for %%EOF.
+
+2005-08-15  Kristian Høgsberg  <krh@redhat.com>
+
+	* poppler/GfxFont.cc: Add fix discussed in #3131 to only use the
+	MacRoman char map if the font has one or the font dicts specifies
+	/MacRoman.
+
 2005-08-06  Kristian Høgsberg  <krh@redhat.com>
 
 	* glib/poppler-page.cc:
@@ -349,6 +363,7 @@
 	can use cairo_show_glyphs() efficiently.
 
 2005-06-26  Albert Astals Cid <aacid@kde.org>
+	
 	* qt/poppler-page.cc:
 	* qt/poppler-page.h: Add PageTransition class and 
 	PageTransition* Page::getTransition() const; to the qt frontend.

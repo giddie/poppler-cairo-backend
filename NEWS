@@ -3,6 +3,10 @@ Release 0.4.0
 	- Real text selection.
 	- API breakage in glib wrapper: dropping dest_x and dest_y
 	  arguments from poppler_page_render_to_pixbuf().
+	- Updates to glib printing API from Martin Kretzschmar to
+	  support setting paper size and duplex from the application.
+	- Much work on Qt4 bindings and Arthur output device.  Still
+          work in progress, thouhg.
 
 Release 0.3.3
 
