@@ -1,3 +1,9 @@
+2005-08-21  Kristian Høgsberg  <krh@redhat.com>
+
+	* poppler/Makefile.am (INCLUDES): Add FREETYPE_CFLAGS.
+
+	* configure.ac: Make freetype check use pkg-config if possible.
+
 2005-08-16  Kristian Høgsberg  <krh@redhat.com>
 
 	* configure.ac: Bump version to 0.4.0.
