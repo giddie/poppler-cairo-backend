@@ -16,7 +16,8 @@ gtk_cairo_test =				\
 	gtk-cairo-test
 
 cairo_includes =				\
-	$(CAIRO_CFLAGS)
+	$(CAIRO_CFLAGS)				\
+	$(FREETYPE_CFLAGS)
 
 endif
 
@@ -45,4 +46,5 @@ gtk_cairo_test_SOURCES =			\
 gtk_cairo_test_LDADD =				\
 	$(top_builddir)/poppler/libpoppler.la	\
 	$(CAIRO_LIBS)				\
+	$(FREETYPE_LIBS)			\
 	$(GTK_TEST_LIBS)
