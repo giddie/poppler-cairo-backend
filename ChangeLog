@@ -1,3 +1,11 @@
+2005-09-01  Kristian Høgsberg  <krh@redhat.com>
+
+	* NEWS:
+	* configure.ac: Release 0.4.2.
+
+	* glib/poppler-page.cc (poppler_page_prepare_output_dev): Patch
+	from Marco to fix more rotation special cases.
+
 2005-08-29  Kristian Høgsberg  <krh@redhat.com>
 
 	* configure.ac (HAVE_FREETYPE_H): Patch from Hiroyuki Ikezoe: Set

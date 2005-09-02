@@ -1,7 +1,7 @@
 dnl Based on Xpdf configure.in and evince configure.ac
 
 AC_PREREQ(2.59)
-AC_INIT(poppler, 0.4.1)
+AC_INIT(poppler, 0.4.2)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
 AM_CONFIG_HEADER(poppler/poppler-config.h)
@@ -87,7 +87,7 @@ AC_ARG_ENABLE(zlib,
 	      AC_HELP_STRING([--disable-zlib],
 	                     [Don't build against zlib.]),
               enable_zlib=$enableval,
-              enable_zlib="try")
+              enable_zlib="no")
 if test x$enable_zlib = xyes; then
   AC_CHECK_LIB([z], [inflate],,
 	       AC_MSG_ERROR("*** zlib library not found ***"))

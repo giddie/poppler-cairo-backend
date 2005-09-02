@@ -1,3 +1,9 @@
+Release 0.4.2
+
+	- Fix a rotation bug.
+	- Fix freetype pkg-config check
+	- Default to built-in decompression.
+
 Release 0.4.1
 
 	- Fix and simplify glib rotation API.
