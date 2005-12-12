@@ -246,8 +246,7 @@ void CairoOutputDev::updateFont(GfxState *state) {
   cairo_set_font_matrix (cairo, &matrix);
 }
 
-void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
-			    GBool snapToGrid) {
+void CairoOutputDev::doPath(GfxState *state, GfxPath *path) {
   GfxSubpath *subpath;
   double x1, y1, x2, y2, x3, y3;
   int i, j;
@@ -256,9 +255,6 @@ void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
     subpath = path->getSubpath(i);
     if (subpath->getNumPoints() > 0) {
       state->transform(subpath->getX(0), subpath->getY(0), &x1, &y1);
-      if (snapToGrid) {
-	x1 = round (x1); y1 = round (y1);
-      }
       cairo_move_to (cairo, x1, y1);
       LOG (printf ("move_to %f, %f\n", x1, y1));
       j = 1;
@@ -267,11 +263,6 @@ void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
 	  state->transform(subpath->getX(j), subpath->getY(j), &x1, &y1);
 	  state->transform(subpath->getX(j+1), subpath->getY(j+1), &x2, &y2);
 	  state->transform(subpath->getX(j+2), subpath->getY(j+2), &x3, &y3);
-	  if (snapToGrid) {
-	    x1 = round (x1); y1 = round (y1);
-	    x2 = round (x2); y2 = round (y2);
-	    x3 = round (x3); y3 = round (y3);
-	  }
 	  cairo_curve_to (cairo, 
 			  x1, y1,
 			  x2, y2,
@@ -280,9 +271,6 @@ void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
 	  j += 3;
 	} else {
 	  state->transform(subpath->getX(j), subpath->getY(j), &x1, &y1);
-	  if (snapToGrid) {
-	    x1 = round (x1); y1 = round (y1);
-	  }
 	  cairo_line_to (cairo, x1, y1);
 	  LOG(printf ("line_to %f, %f\n", x1, y1));
 	  ++j;
@@ -297,7 +285,7 @@ void CairoOutputDev::doPath(GfxState *state, GfxPath *path,
 }
 
 void CairoOutputDev::stroke(GfxState *state) {
-  doPath (state, state->getPath(), gFalse);
+  doPath (state, state->getPath());
   cairo_set_source_rgba (cairo,
 			 stroke_color.r, stroke_color.g, stroke_color.b,
 			 stroke_opacity);
@@ -306,7 +294,7 @@ void CairoOutputDev::stroke(GfxState *state) {
 }
 
 void CairoOutputDev::fill(GfxState *state) {
-  doPath (state, state->getPath(), gFalse);
+  doPath (state, state->getPath());
   cairo_set_fill_rule (cairo, CAIRO_FILL_RULE_WINDING);
   cairo_set_source_rgba (cairo,
 			 fill_color.r, fill_color.g, fill_color.b,
@@ -316,7 +304,7 @@ void CairoOutputDev::fill(GfxState *state) {
 }
 
 void CairoOutputDev::eoFill(GfxState *state) {
-  doPath (state, state->getPath(), gFalse);
+  doPath (state, state->getPath());
   cairo_set_fill_rule (cairo, CAIRO_FILL_RULE_EVEN_ODD);
   cairo_set_source_rgb (cairo,
 		       fill_color.r, fill_color.g, fill_color.b);
@@ -325,14 +313,14 @@ void CairoOutputDev::eoFill(GfxState *state) {
 }
 
 void CairoOutputDev::clip(GfxState *state) {
-  doPath (state, state->getPath(), gFalse);
+  doPath (state, state->getPath());
   cairo_set_fill_rule (cairo, CAIRO_FILL_RULE_WINDING);
   cairo_clip (cairo);
   LOG (printf ("clip\n"));
 }
 
 void CairoOutputDev::eoClip(GfxState *state) {
-  doPath (state, state->getPath(), gFalse);
+  doPath (state, state->getPath());
   cairo_set_fill_rule (cairo, CAIRO_FILL_RULE_EVEN_ODD);
   cairo_clip (cairo);
   LOG (printf ("clip-eo\n"));

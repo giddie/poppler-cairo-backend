@@ -3025,7 +3025,7 @@ public:
   virtual void visitWord (TextWord *word, int begin, int end,
 			  PDFRectangle *selection) { };
 
-  GooString *TextSelectionDumper::getText(void);
+  GooString *getText(void);
 
 private:
   TextLineFrag *frags;
@@ -3351,8 +3351,8 @@ void TextLine::visitSelection(TextSelectionVisitor *visitor,
 	(selection->x2 < p->xMax && selection->y2 < p->yMax))
       if (begin == NULL)
 	begin = p;
-    if ((selection->x1 > p->xMin && selection->y1 > p->yMin) ||
-	(selection->x2 > p->xMin && selection->y2 > p->yMin))
+    if ((selection->x1 > p->xMin && selection->y1 > p->yMin ||
+	selection->x2 > p->xMin && selection->y2 > p->yMin) && (begin != NULL))
       end = p->next;
   }
 
@@ -3419,8 +3419,8 @@ void TextBlock::visitSelection(TextSelectionVisitor *visitor,
       stop_y = selection->y1;
     }
 
-    if (selection->x1 > p->xMin && selection->y1 > p->yMin ||
-	selection->x2 > p->xMin && selection->y2 > p->yMin)
+    if ((selection->x1 > p->xMin && selection->y1 > p->yMin ||
+	selection->x2 > p->xMin && selection->y2 > p->yMin) && (begin != NULL))
       end = p->next;
   }
 

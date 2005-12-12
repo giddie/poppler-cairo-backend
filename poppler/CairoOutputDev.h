@@ -15,7 +15,7 @@
 #endif
 
 #include "goo/gtypes.h"
-#include <cairo/cairo-ft.h>
+#include <cairo-ft.h>
 #include "OutputDev.h"
 #include "GfxState.h"
 
@@ -133,7 +133,7 @@ public:
   void setSurface (cairo_surface_t *surface);
 
 protected:
-  void doPath(GfxState *state, GfxPath *path, GBool snapToGrid);
+  void doPath(GfxState *state, GfxPath *path);
   
   GfxRGB fill_color;
   GfxRGB stroke_color;

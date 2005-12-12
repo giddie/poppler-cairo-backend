@@ -1,3 +1,10 @@
+Release 0.4.3
+
+	- Fix selection crasher (Nickolay V. Shmyrev, #4402).
+	- Fix printing problem for single page output (#4555).
+	- Fix miscelanous compile problems/warnings.
+	- CVE-2005-3191 and CAN-2005-2097 security fixes.
+
 Release 0.4.2
 
 	- Fix a rotation bug.

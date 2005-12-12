@@ -1,3 +1,31 @@
+2005-12-12  Kristian Høgsberg  <krh@redhat.com>
+
+	* poppler/TextOutputDev.cc:
+	* qt/poppler-qt.h: GCC-4.1 fixes (#5031).
+
+	* qt/Makefile.am (noinst_PROGRAMS): Only build qt test program if
+	splash is enabled.
+
+	* poppler/CairoOutputDev.cc: Remove unused grid snapping code,
+	sidestepping #4507.
+	
+	* glib/poppler-document.h: Fix glib-mkenums warning (#4600).
+
+	* poppler/Makefile.am (libpoppler_la_LIBADD): Add $(FREETYPE_LIBS)
+	(#4514).
+
+	* poppler/TextOutputDev.cc (TextWord::visitSelection,
+	TextWord::visitSelection): Fix selection crash (#4402).
+
+	* poppler/CairoOutputDev.h: Fix wrong cairo-ft.h include (#4413).
+
+	* poppler/JPXStream.cc:
+	* poppler/Stream.cc:
+	* poppler/Stream.h: CVE-2005-3191 security fix.
+
+	* fofi/FoFiTrueType.cc:
+	* poppler/SplashOutputDev.cc: CAN-2005-2097 security fix.
+
 2005-10-16  Kristian Høgsberg  <krh@redhat.com>
 
 	* poppler/poppler-config.h.in (GCC_PRINTF_FORMAT): Remove evil
