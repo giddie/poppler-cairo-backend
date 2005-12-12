@@ -1,5 +1,11 @@
 2005-12-12  Kristian Høgsberg  <krh@redhat.com>
 
+	* configure.ac: Bump release.
+
+	* NEWS: Sum up changes.
+	
+2005-12-12  Kristian Høgsberg  <krh@redhat.com>
+
 	* poppler/TextOutputDev.cc:
 	* qt/poppler-qt.h: GCC-4.1 fixes (#5031).
 
