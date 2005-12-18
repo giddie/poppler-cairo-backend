@@ -1,6 +1,8 @@
 2005-12-18  Albert Astals Cid  <aacid@kde.org>
 
-        * configure.ac: Better jpeg detection, refer to ml PCbsd problem
+	* configure.ac: Better jpeg detection, refer to ml PCbsd problem
+	* qt/Makefile.am: Backport fix build on systems where fontconfig is
+	not on /usr/include
 
 2005-12-12  Kristian Høgsberg  <krh@redhat.com>
 
