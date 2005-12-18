@@ -1,3 +1,7 @@
+2005-12-18  Albert Astals Cid  <aacid@kde.org>
+
+        * configure.ac: Better jpeg detection, refer to ml PCbsd problem
+
 2005-12-12  Kristian Høgsberg  <krh@redhat.com>
 
 	* configure.ac: Bump release.
