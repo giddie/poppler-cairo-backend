@@ -1,3 +1,8 @@
+Release 0.4.4
+
+	- Security update; CVE-2005-3624, CVE-2005-3625, CVE-2005-3627.
+	- Fix KDE bug #119569, endless loop in jpeg decoder.
+
 Release 0.4.3
 
 	- Fix selection crasher (Nickolay V. Shmyrev, #4402).

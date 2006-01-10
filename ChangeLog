@@ -1,5 +1,13 @@
 2006-01-10  Kristian Høgsberg  <krh@redhat.com>
 
+	* configure.ac: Bump realease to 0.4.4.
+
+	* NEWS: Sum up changes.
+
+	* poppler/DCTStream.cc: Backport patch for KDE #119569.
+
+2006-01-10  Kristian Høgsberg  <krh@redhat.com>
+
 	Security patch from Martin Pitt (#5516).  Multiple integer/buffer
 	overflows.
 
