@@ -1,3 +1,31 @@
+2006-01-10  Kristian Høgsberg  <krh@redhat.com>
+
+	Security patch from Martin Pitt (#5516).  Multiple integer/buffer
+	overflows.
+
+	* poppler/Stream.cc (CCITTFaxStream::CCITTFaxStream): Check
+	columns for negative or large values (CVE-2005-3624).
+	
+	* poppler/Stream.cc: Reset numComps to 0 since it's a global
+	variable that is used later (CVE-2005-3627).
+	
+	* poppler/Stream.cc (DCTStream::readHuffmanTables): Fix out of
+	bounds array access in Huffman tables (CVE-2005-3627).
+	
+	* poppler/Stream.cc (DCTStream::readMarker): Check for EOF in
+	while loop to prevent endless loops (CVE-2005-3625).
+	
+	* poppler/JBIG2Stream.cc (JBIG2Bitmap::JBIG2Bitmap,
+	JBIG2Bitmap::expand, JBIG2Stream::readHalftoneRegionSeg): Check
+	user supplied width and height against invalid values.  Allocate
+	one extra byte to prevent out of bounds access in combine().
+	
+2006-01-10  Kristian Høgsberg  <krh@redhat.com>
+
+	* poppler/Stream.cc: Fix bug in last security patch (#5514).
+	Also, for the record, the security patch also fixes CVE-2005-3192
+	and CVE-2005-3193.
+
 2005-12-18  Albert Astals Cid  <aacid@kde.org>
 
 	* configure.ac: Better jpeg detection, refer to ml PCbsd problem
