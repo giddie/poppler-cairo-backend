@@ -1,3 +1,7 @@
+Release 0.4.5
+
+	- Security update; CVE-2006-0301.
+
 Release 0.4.4
 
 	- Security update; CVE-2005-3624, CVE-2005-3625, CVE-2005-3627.
