@@ -1,3 +1,27 @@
+Release 0.6.1
+
+	poppler core:
+	 * Fix printing with different x and y scale
+	 * Fix crash when Form Fields array contains references to non existent objects
+	 * Fix crash in CairoOutputDev::drawMaskedImage()
+	 * Fix embedded file description not working on some cases
+	
+	Qt4 frontend:
+	 * Fix printing issue
+	 * Avoid double free
+	 * Fix memory leak when dealing with embedded files
+	
+	glib frontend:
+	 * Fix build with --disable-cairo-output
+	 * Do not return unknown field type for signature form fields
+	
+	build system:
+	 * Support automake-1.10
+	 * More compatible sh code in qt.m4
+	
+	utils:
+	 * Fix build on Sun Studio compiler
+
 Release 0.6
 
 	- CairoOutputDev fixes
