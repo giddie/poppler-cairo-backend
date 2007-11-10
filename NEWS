@@ -1,3 +1,28 @@
+Release 0.6.2
+
+	poppler core:
+	 * Fix CVE-2007-4352, CVE-2007-5392 and CVE-2007-5393
+	 * Fix a crash on documents with wrong CCITTFaxStream
+	 * Fix a crash in the Cairo renderer with invalid embedded fonts
+	 * Fix a crash with invalid TrueType fonts
+	 * Check if font is inside the clip area before rendering
+	   it to a temporary bitmap in the Splash renderer. Fixes crashes on
+	   incorrect documents
+	 * Do not use exit(1) on DCTStream errors
+	 * Detect form fields at any depth level
+	 * Do not generate appearance stream for radio buttons that are not active
+	 * mingw fixes
+	
+	build system:
+	 * Require fontconfig >= 2.0
+	 * builddir != srcdir fixes
+	
+	Qt4 frontend:
+	 * Improved documentation
+	
+	misc:
+	 * Fix FSF address
+
 Release 0.6.1
 
 	poppler core:
