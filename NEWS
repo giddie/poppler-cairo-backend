@@ -1,3 +1,17 @@
+Release 0.6.3
+
+	core:
+	 * Fix crash in extra debug code
+
+	glib frontend:
+	 * Make sure passwords are passed in latin1 to poppler core
+
+	Qt frontend:
+	 * Fix crash on documents that specify an empty date
+	
+	build system:
+	 * Disable gtk tests if the user disabled glib frontend
+
 Release 0.6.2
 
 	poppler core:
