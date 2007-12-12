@@ -4,7 +4,7 @@ Release 0.6.3
 	 * Fix crash in extra debug code
 
 	glib frontend:
-	 * Make sure passwords are passed in latin1 to poppler core
+	 * Make sure passwords are passed correctly to poppler core
 
 	Qt frontend:
 	 * Fix crash on documents that specify an empty date
