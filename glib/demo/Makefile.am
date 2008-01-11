@@ -12,7 +12,7 @@ poppler_glib_demo_SOURCES = 			\
 	fonts.h					\
 	fonts.c					\
 	info.h					\
-	info.c					\
+	info.cc					\
 	links.h					\
 	links.c					\
 	outline.h				\
