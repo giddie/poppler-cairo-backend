@@ -66,4 +66,5 @@ pdf_inspector_LDADD =					\
 	$(GTK_TEST_LIBS)
 
 EXTRA_DIST =					\
-	pdf-operators.c
+	pdf-operators.c				\
+	pdf-inspector.glade
