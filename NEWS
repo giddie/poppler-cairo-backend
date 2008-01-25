@@ -1,3 +1,23 @@
+Release 0.6.4
+
+	Qt4 frontend:
+	 * Fix crash on links that point to a non existant page
+	 * Make Document::renderHints return the correct render hints
+	 * Fix infinite loop when parsing LineAnnotation
+
+	core:
+	 * Fix crash in the Splash renderer when T3 fonts are badly defined
+	 * Draw underlined Links correctly
+
+	utils:
+	 * Fix two use after free bugs in HtmlOutputDev.cc
+
+	build system:
+	 * Fix build on mingw32
+
+	tests:
+	 * Distribute the glade file of pdf-inspector
+
 Release 0.6.3
 
 	core:
