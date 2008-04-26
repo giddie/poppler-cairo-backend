@@ -1,3 +1,16 @@
+Release 0.8.1
+
+	core:
+	 * Do not call FT_Done_Face on a live cairo_font_face_t as it might cause crashes
+	 * Do not take into account Colorspace resource subdictionary for image XObjects
+	 * Downsample 16 bit per component images to 8 bit per component so they render
+	
+	build system:
+	 * Link to pthread when the system needs it
+
+	windows:
+	 * Fix comparing against NULL instead against INVALID_HANDLE_VALUE when calling FindFirstFile
+
 Release 0.8.0
 
 	* Fix caching of members in the glib frontend causing issues with rendering
