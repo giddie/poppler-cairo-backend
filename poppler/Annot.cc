@@ -1735,7 +1735,7 @@ void AnnotWidget::initialize(XRef *xrefA, Catalog *catalog, Dict *dict) {
   // Only text or choice fields needs to have appearance regenerated
   // see section 8.6.2 "Variable Text" of PDFReference
   regen = gFalse;
-  if (widget->getType () == formText || widget->getType () == formChoice) {
+  if (widget != NULL && (widget->getType () == formText || widget->getType () == formChoice)) {
     regen = form->getNeedAppearances ();
   }
 
@@ -2577,7 +2577,7 @@ void AnnotWidget::generateFieldAppearance() {
   int dashLength, ff, quadding, comb, nOptions, topIdx, i, j;
   GBool modified;
 
-  if (!widget->getField () || !widget->getField ()->getObj ()->isDict ())
+  if (widget == NULL || !widget->getField () || !widget->getField ()->getObj ()->isDict ())
     return;
 
   field = widget->getField ()->getObj ()->getDict ();
