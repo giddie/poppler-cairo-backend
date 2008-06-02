@@ -1249,7 +1249,6 @@ void AnnotText::initialize(XRef *xrefA, Catalog *catalog, Dict *dict) {
         state = stateUnknown;
       }
 
-      delete stateName;
     } else {
       state = stateUnknown;
     }
@@ -1286,7 +1285,6 @@ void AnnotText::initialize(XRef *xrefA, Catalog *catalog, Dict *dict) {
       state = stateUnknown;
     }
 
-    delete modelName;
   } else {
     state = stateUnknown;
   }
