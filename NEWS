@@ -1,3 +1,22 @@
+Release 0.8.3
+
+	Core:
+	 * Fix crash when reading some PDF with annotations
+	 * Fix crash on PDF that reference Optional Content elements that don't exist
+	 * Fix leaks on error conditions
+	 * Do not limit CharCodeToUnicodeString to 8 characters
+	 * Support for surrogates outside the BMP plane
+	
+	Qt 3 frontend:
+	 * Fix crash when reading PDF with password
+	 * Fix leak when calling scanForFonts()
+	
+	Qt 4 frontend:
+	 * Fix the text() method
+	
+	Splash renderer:
+	 * Fix compilation with --enable-fixedpoint
+
 Release 0.8.2
 
 	core:
