@@ -1,3 +1,17 @@
+Release 0.8.4
+
+	Core:
+	 * Fix leak in ABWOutputDev.cc
+	 * Fix uninitialized variable that broke file saving in some cases
+	 * Use a single global FT_Library in CairoOutputDev.
+	   Fixes some crashes in CairoOutputDev.
+	
+	Qt 4 frontend:
+	 * Fix saving over existing files
+	
+	build system:
+	 * Make sure Qt4 moc is used to generate moc files in Qt4 frontend
+
 Release 0.8.3
 
 	Core:
