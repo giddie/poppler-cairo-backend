@@ -63,6 +63,10 @@ private:
   int fontsLen;
   int fontsSize;
 
+  Ref *visitedXObjects;
+  int visitedXObjectsLen;
+  int visitedXObjectsSize;
+
   void scanFonts(Dict *resDict, GooList *fontsList);
 };
 
