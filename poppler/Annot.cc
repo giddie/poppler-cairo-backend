@@ -1135,7 +1135,7 @@ void AnnotMarkup::initialize(XRef *xrefA, Dict *dict, Catalog *catalog, Object *
   obj1.free();
 
   if (dict->lookup("IRT", &obj1)->isDict()) {
-    inReplyTo = obj1.getDict();
+    inReplyTo = new Dict(obj1.getDict());
   } else {
     inReplyTo = NULL;
   }
