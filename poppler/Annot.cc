@@ -2968,6 +2968,7 @@ void AnnotWidget::generateFieldAppearance() {
     apObj.dictSet("N", &oaRef);
     annot->set("AP", &apObj);
     Dict* d = new Dict(annot);
+    d->decRef();
     Object dictObj;
     dictObj.initDict(d);
 
