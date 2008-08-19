@@ -20,7 +20,7 @@
 #include "goo/GooHash.h"
 #include "FoFiType1C.h"
 #include "FoFiTrueType.h"
-#include "Error.h"
+#include "poppler/Error.h"
 
 //
 // Terminology
