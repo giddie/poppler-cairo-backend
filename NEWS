@@ -1,3 +1,14 @@
+Release 0.8.6
+
+	Core:
+	 * Call error() when font loading fails
+	 * Be less strict parsing TTF tables (bug #16940)
+	 * Fix crash due to uninitialized variable
+
+	Qt 4 frontend:
+	 * Make the paper color setting working as it should
+	 * Make sure to use the correct page width/height for form widgets coordinates
+
 Release 0.8.5
 
 	Core:
