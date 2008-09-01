@@ -1,3 +1,9 @@
+Release 0.8.7
+
+	Core:
+	 * Fix regression in Form rendering
+	 * Fix memory leak in the cairo backend
+
 Release 0.8.6
 
 	Core:
