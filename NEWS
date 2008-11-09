@@ -1,3 +1,20 @@
+Release 0.10.1
+
+	core:
+	 * Improvements in Optional Content support
+	 * Small fix in Form support
+	 * Fix memory leak in case of error
+	 * Fix potential crash on text search
+	 * Try render documents with invalid indexed color space parameters. Bug #18374
+	 * Fix crash on text extraction when poppler-data is not installed. Bug #18023
+	
+	Qt:
+	 * Fix two memory leaks
+	
+	Qt4:
+	 * Small documentation improvement
+	 * Fix memory leak in the demo code
+
 Release 0.10.0
 
 	core:
