@@ -1,3 +1,18 @@
+Release 0.10.2
+
+	core:
+	 * Fix a crash when selecting text in word mode
+	 * Fix a crash in some malformed documents (second argument of opMarkPoint is not a dictionary)
+	 * Ensure cairo font matrix is invertable. Fixes bugs #18254 and #18429
+	 * Fix a memory leak (Bug #18924)
+	
+	Qt4:
+	 * Fix deserization of links right coordinate
+	
+	misc:
+	 * Fix build on Solaris 10 + Sun Studio 12
+	 * Compile with -pedantic
+
 Release 0.10.1
 
 	core:
