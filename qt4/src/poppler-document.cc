@@ -181,7 +181,18 @@ namespace Poppler {
     QList<FontInfo> Document::fonts() const
     {
 	QList<FontInfo> ourList;
-	scanForFonts(numPages(), &ourList);
+
+	FontInfoScanner fontInfoScanner( m_doc->doc );
+	GooList *items = fontInfoScanner.scan( numPages() );
+
+	if ( NULL == items )
+	    return ourList;
+
+	for ( int i = 0; i < items->getLength(); ++i ) {
+	    ourList.append( FontInfo(FontInfoData((::FontInfo*)items->get(i))) );
+	}
+	deleteGooList(items, ::FontInfo);
+
 	return ourList;
     }
 
