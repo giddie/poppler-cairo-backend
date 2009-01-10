@@ -1,3 +1,29 @@
+Release 0.10.3
+
+	core:
+	 * Fix a crash on documents with malformed outline. Bug #19024
+	 * Fix leak on AnnotScreen destructor. Bug #19095
+	 * Fix wrong PS generation when a large image is in Patterns. Bug #18908
+	 * Remove BaseFile.h it was never used. Bug #19298
+	 * Improve document saving
+	 * Fix PS generation of PDF with malformed font Length2 definition
+	 * Fix a leak while parsing annotations
+	 * Fix rendering of some checkboxes
+	
+	Qt4:
+	 * Fix positioning of Form rects on PDF with cropbox
+	 * Fix positioning of Annotation rects on PDF with cropbox. Bug #18558.
+	 * Small documentation improvements
+	 * Make Document::fonts() work when called more than once. Bug #19405
+	
+	build system:
+	 * CMake: look harder for openjpeg
+	 * CMake: update the poppler core headers installation
+	 * Autotools: do not install Function.cc as it's not a header
+	
+	Qt:
+	 * Fix deserialization of links right coordinate
+
 Release 0.10.2
 
 	core:
