@@ -1,3 +1,13 @@
+Release 0.10.4
+
+	core:
+	 * Fix a memory leak when asking for a document-level JS
+	 * Do not crash in some PDF we do not parse correctly. Bug #19702
+	 * Fix crash on unexepcted form Opt value. Bug #19790
+	
+	utils:
+	 * Fix pdfimages to extract i color components per pixel jpeg images. Bug #19789
+
 Release 0.10.3
 
 	core:
