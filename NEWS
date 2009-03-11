@@ -1,3 +1,20 @@
+Release 0.10.5
+
+	core:
+	 * Read the UF entry if present and prefer it over F in Filespec dictionary
+	 * Fix typo that was making CairoOutputDev crash on some files. Bug #17337
+	 * Make JBIG2Stream more robust to corrupt input data
+	 * Do not blindly follow loops parsing OutlineItem. Bug #18364
+	 * Set up the error manager before calling jpeg_create_decompress. Bug #20484
+	 * Check there is an optional content config before using it. Bug #20587
+	 * Fix rendering of some PDF with OpenType fonts. Bug #20605
+
+	build system:
+	 * Yet more support for build on windows
+	 * Use AC_CHECK_HEADER to find headers. Bug #20538
+	 * Check for pkgconfig before using it
+	 * General autotools improvements
+
 Release 0.10.4
 
 	core:
