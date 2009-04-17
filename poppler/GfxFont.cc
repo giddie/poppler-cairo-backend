@@ -19,7 +19,6 @@
 // Copyright (C) 2007 Ed Catmur <ed@catmur.co.uk>
 // Copyright (C) 2008 Jonathan Kew <jonathan_kew@sil.org>
 // Copyright (C) 2008 Ed Avis <eda@waniasset.com>
-// Copyright (C) 2008 Hib Eris <hib@hiberis.nl>
 // Copyright (C) 2009 Peter Kerzum <kerzum@yandex-team.ru>
 //
 // To see a description of the changes please see the Changelog file that
