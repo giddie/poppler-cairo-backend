@@ -4215,7 +4215,13 @@ void Gfx::pushMarkedContent() {
 }
 
 GBool Gfx::contentIsHidden() {
-  return mcStack && mcStack->ocSuppressed;
+  MarkedContentStack *mc = mcStack;
+  bool hidden = mc && mc->ocSuppressed;
+  while (!hidden && mc && mc->next) {
+    mc = mc->next;
+    hidden = mc->ocSuppressed;
+  }
+  return hidden;
 }
 
 void Gfx::opBeginMarkedContent(Object args[], int numArgs) {
