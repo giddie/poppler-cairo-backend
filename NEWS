@@ -1,3 +1,19 @@
+Release 0.10.7
+
+	core:
+	 * Fix rendering of axial shadings. Bug #19896
+	 * Fix out of bounds access in GfxCIDFont
+	 * Fix decryption using owner password on some pdf. Bug #21270
+	 * Hidden property depends on parent being hidden, not only yourself. Bug #16093
+	 * Make sure ImageStream::close() is called after ImageStream::reset()
+	
+	glib:
+	 * Only create checksum string for valid checksums
+	 * Several fixes in poppler_annot_get_color()
+	
+	utils:
+	 * Link pdftoabw to abiword libs. Bug #21520
+
 Release 0.10.6
 
 	core:
