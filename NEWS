@@ -1,3 +1,30 @@
+Release 0.12.1
+
+	core:
+	 * Fix compilation on some compilers
+	 * Only initialize the font list once in Windows32/MSVC
+	 * Do not crash on fonts without CharCodeToUnicode. Bug #24036
+	 * Fix regression due to not setting LC_NUMERIC anymore
+	 * Improve realibility for Streams with broken Length. Bug #6841
+	 * Write the Info into the trailer dict if there is one. Bug #24091
+	 * Do not crash when saving files that come from a stream without name. Bug #24090
+	 * Improve relability of the save function
+	 * Fix the Length value if it was wrong when saving
+	 * Fix includes for those using internal headers
+	 * Rework how hinting is used in the splash backend. It is disabled by default now
+	 * fix constructor of DCTStream when using internal decoder
+	 * Security fixes based xpdf 3.02pl4
+	
+	qt4:
+	 * Add the possibility of setting wheter to use or not font hinting
+	 * Add a way for converters to return more exact errors they had when converting
+	 * Check the document is not locked when converting to PS
+	
+	build system:
+	 * Compile on Cygwin
+	 * Use _WIN32 instead of WIN32. Bug #24259
+	 * Add the possibility to pass LIB_SUFFIX when using CMake
+
 Release 0.12.0
 
 	core:
