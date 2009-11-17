@@ -36,6 +36,7 @@ public:
   GBool isStatic(Guchar value);
 
 private:
+  void createMatrix();
 
   void buildDispersedMatrix(int i, int j, int val,
 			    int delta, int offset);
@@ -43,6 +44,7 @@ private:
   int distance(int x0, int y0, int x1, int y1);
   void buildSCDMatrix(int r);
 
+  SplashScreenParams *screenParams;	// params to create the other members
   Guchar *mat;			// threshold matrix
   int size;			// size of the threshold matrix
   Guchar minVal;		// any pixel value below minVal generates
