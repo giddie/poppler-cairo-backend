@@ -46,25 +46,13 @@ static int cmpDistances(const void *p0, const void *p1) {
 // threshold matrix using recursive tesselation.  Gamma correction
 // (gamma = 1 / 1.33) is also computed here.
 SplashScreen::SplashScreen(SplashScreenParams *params) {
+  Guchar u, black, white;
+  int i; 
 
   if (!params) {
     params = &defaultParams;
   }
   
-  screenParams = params;
-  mat = NULL;
-  size = 0;
-  maxVal = 0;
-  minVal = 0;
-}
-
-void SplashScreen::createMatrix()
-{
-  Guchar u, black, white;
-  int i;
-  
-  SplashScreenParams *params = screenParams;
-
   switch (params->type) {
 
   case splashScreenDispersed:
@@ -361,7 +349,6 @@ void SplashScreen::buildSCDMatrix(int r) {
 }
 
 SplashScreen::SplashScreen(SplashScreen *screen) {
-  screenParams = screen->screenParams;
   size = screen->size;
   mat = (Guchar *)gmallocn(size * size, sizeof(Guchar));
   memcpy(mat, screen->mat, size * size * sizeof(Guchar));
@@ -376,8 +363,6 @@ SplashScreen::~SplashScreen() {
 int SplashScreen::test(int x, int y, Guchar value) {
   int xx, yy;
   
-  if (mat == NULL) createMatrix();
-
   if (value < minVal) {
     return 0;
   }
@@ -394,7 +379,5 @@ int SplashScreen::test(int x, int y, Guchar value) {
 }
 
 GBool SplashScreen::isStatic(Guchar value) {
-  if (mat == NULL) createMatrix();
-  
   return value < minVal || value >= maxVal;
 }
