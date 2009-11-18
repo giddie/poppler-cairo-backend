@@ -1,3 +1,21 @@
+Release 0.12.2
+
+	core:
+	 * Fix a memory leak when converting to PostScript
+	 * Fix crash when reading a font fails. Bug #24525
+	 * Make the ICC cache per page instead of global. Bug #24686
+	 * Do not accept negative interval lengths in the page labels tree. Bug #24721
+	 * Do not crash on files Aspect of Movie objects are reals instead of integers. Bug #24733
+	 * Do not render patterns when using CairoImageOutputDev
+	 * Allow Transitions dictionary to be a Ref
+	 * Do not crash if jpeg_start_decompress fails. KDE bug #214317
+	
+	glib:
+	 * Fix CVE-2009-3607
+	
+	qt4:
+	 * Use '.' in the annotations XML instead of the decimal separator of the current locale
+
 Release 0.12.1
 
 	core:
