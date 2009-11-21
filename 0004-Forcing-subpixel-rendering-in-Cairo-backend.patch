@@ -1,0 +1,33 @@
+From 39710bddeb2bd5e84669f7008ad66024fda329be Mon Sep 17 00:00:00 2001
+From: Paul Gideon Dann <pdgiddie@gmail.com>
+Date: Wed, 20 May 2009 13:06:48 +0100
+Subject: [PATCH 4/5] Forcing subpixel rendering in Cairo backend
+
+---
+ poppler/CairoOutputDev.cc |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+
+diff --git a/poppler/CairoOutputDev.cc b/poppler/CairoOutputDev.cc
+index a19f42c..5fe7f02 100644
+--- a/poppler/CairoOutputDev.cc
++++ b/poppler/CairoOutputDev.cc
+@@ -179,6 +179,16 @@ void CairoOutputDev::setCairo(cairo_t *cairo)
+   }
+   if (cairo != NULL) {
+     this->cairo = cairo_reference (cairo);
++    {
++      cairo_font_options_t *options = cairo_font_options_create ();
++      cairo_get_font_options (cairo, options);
++      cairo_font_options_set_antialias (options, CAIRO_ANTIALIAS_SUBPIXEL);
++      cairo_font_options_set_subpixel_order (options, CAIRO_SUBPIXEL_ORDER_RGB);
++      cairo_font_options_set_lcd_filter (options, CAIRO_LCD_FILTER_FIR5);
++      cairo_font_options_set_hint_style (options, CAIRO_HINT_STYLE_SLIGHT);
++      cairo_set_font_options (cairo, options);
++      cairo_font_options_destroy (options);
++    }
+ 	/* save the initial matrix so that we can use it for type3 fonts. */
+ 	//XXX: is this sufficient? could we miss changes to the matrix somehow?
+ 	cairo_get_matrix(cairo, &orig_matrix);
+-- 
+1.6.5.3
+

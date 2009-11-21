@@ -1,0 +1,181 @@
+From 25f7e0b87c4a1d9b578acbd1d5fbc41a57e8e05c Mon Sep 17 00:00:00 2001
+From: Paul Gideon Dann <pdgiddie@gmail.com>
+Date: Wed, 20 May 2009 11:42:28 +0100
+Subject: [PATCH 1/5] Cairo backend added to Qt4 wrapper
+
+---
+ qt4/src/CMakeLists.txt      |   13 ++++++++++
+ qt4/src/poppler-document.cc |    1 +
+ qt4/src/poppler-page.cc     |   56 +++++++++++++++++++++++++++++++++++++++++++
+ qt4/src/poppler-private.h   |   12 +++++++++
+ qt4/src/poppler-qt4.h       |    3 +-
+ 5 files changed, 84 insertions(+), 1 deletions(-)
+
+diff --git a/qt4/src/CMakeLists.txt b/qt4/src/CMakeLists.txt
+index f6c7b16..2be9803 100644
+--- a/qt4/src/CMakeLists.txt
++++ b/qt4/src/CMakeLists.txt
+@@ -5,6 +5,10 @@ include_directories(
+   ${QT4_INCLUDE_DIR}
+   ${CMAKE_CURRENT_BINARY_DIR}
+ )
++if (HAVE_CAIRO)
++  include_directories(${CAIRO_INCLUDES})
++  add_definitions(${CAIRO_CFLAGS})
++endif (HAVE_CAIRO)
+ 
+ set(poppler_qt4_SRCS
+   poppler-annotation.cc
+@@ -31,10 +35,19 @@ if (ENABLE_SPLASH)
+     ${CMAKE_SOURCE_DIR}/poppler/ArthurOutputDev.cc
+   )
+ endif (ENABLE_SPLASH)
++if (HAVE_CAIRO)
++  set(poppler_qt4_SRCS ${poppler_qt4_SRCS}
++    ${CMAKE_SOURCE_DIR}/poppler/CairoOutputDev.cc
++    ${CMAKE_SOURCE_DIR}/poppler/CairoFontEngine.cc
++  )
++endif(HAVE_CAIRO)
+ qt4_automoc(${poppler_qt4_SRCS})
+ add_library(poppler-qt4 SHARED ${poppler_qt4_SRCS})
+ set_target_properties(poppler-qt4 PROPERTIES VERSION 3.2.0 SOVERSION 3)
+ target_link_libraries(poppler-qt4 poppler ${QT4_QTCORE_LIBRARY} ${QT4_QTGUI_LIBRARY} ${QT4_QTXML_LIBRARY})
++if (HAVE_CAIRO)
++  target_link_libraries(poppler-qt4 ${CAIRO_LIBRARIES})
++endif (HAVE_CAIRO)
+ if(MSVC)
+ target_link_libraries(poppler-qt4 poppler ${poppler_LIBS})
+ endif(MSVC)
+diff --git a/qt4/src/poppler-document.cc b/qt4/src/poppler-document.cc
+index c2563f4..87a611c 100644
+--- a/qt4/src/poppler-document.cc
++++ b/qt4/src/poppler-document.cc
+@@ -500,6 +500,7 @@ namespace Poppler {
+ #if defined(HAVE_SPLASH)
+         ret << Document::SplashBackend;
+         ret << Document::ArthurBackend;
++        ret << Document::CairoBackend;
+ #endif
+         return ret;
+     }
+diff --git a/qt4/src/poppler-page.cc b/qt4/src/poppler-page.cc
+index 9e889ce..38d77d3 100644
+--- a/qt4/src/poppler-page.cc
++++ b/qt4/src/poppler-page.cc
+@@ -31,6 +31,7 @@
+ #include <QtGui/QPainter>
+ 
+ #include <config.h>
++#include <math.h>
+ #include <PDFDoc.h>
+ #include <Catalog.h>
+ #include <Form.h>
+@@ -273,6 +274,61 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
+ #endif
+       break;
+     }
++    case Poppler::Document::CairoBackend:
++    {
++#if defined(HAVE_CAIRO)
++      CairoOutputDev *output_dev =
++        static_cast<CairoOutputDev *>(m_page->parentDoc->getOutputDev());
++      double width, height;
++      int cairo_width, cairo_height, cairo_rowstride, rotate;
++      unsigned char *cairo_data;
++      cairo_surface_t *surface;
++      cairo_t *cairo;
++
++      rotate = rotation + m_page->page->getRotate ();
++      if (rotate == 90 || rotate == 270) {
++        height = m_page->page->getCropWidth ();
++        width = m_page->page->getCropHeight ();
++      } else {
++        width = m_page->page->getCropWidth ();
++        height = m_page->page->getCropHeight ();
++      }
++
++      const double xscale = xres / 72.0;
++      const double yscale = yres / 72.0;
++      cairo_width = (int) ceil(width * xscale);
++      cairo_height = (int) ceil(height * yscale);
++
++      cairo_rowstride = cairo_width * 4;
++      cairo_data = (Guchar *) gmallocn (cairo_height, cairo_rowstride);
++      // Never transparent
++      memset (cairo_data, 0xff, cairo_height * cairo_rowstride);
++
++      surface = cairo_image_surface_create_for_data(cairo_data,
++                CAIRO_FORMAT_ARGB32,
++                cairo_width, cairo_height,
++                cairo_rowstride);
++
++      cairo = cairo_create (surface);
++      output_dev->setCairo (cairo);
++
++      m_page->parentDoc->doc->displayPageSlice(
++        output_dev, m_page->index + 1, xres, yres, rotation, false, true,
++        false, x, y, w, h);
++
++      // construct a qimage SHARING the raw bitmap data in memory
++      QImage tmpimg(cairo_data, cairo_width, cairo_height,
++                    QImage::Format_ARGB32);
++      img = tmpimg.copy();
++
++      // Clean up
++      output_dev->setCairo(NULL);
++      cairo_surface_destroy (surface);
++      cairo_destroy (cairo);
++      gfree(cairo_data);
++#endif
++      break;
++    }
+   }
+ 
+   return img;
+diff --git a/qt4/src/poppler-private.h b/qt4/src/poppler-private.h
+index f148dbc..da0440b 100644
+--- a/qt4/src/poppler-private.h
++++ b/qt4/src/poppler-private.h
+@@ -38,6 +38,9 @@
+ #if defined(HAVE_SPLASH)
+ #include <SplashOutputDev.h>
+ #endif
++#if defined(HAVE_CAIRO)
++#include <CairoOutputDev.h>
++#endif
+ 
+ #include "poppler-qt4.h"
+ 
+@@ -145,6 +148,15 @@ namespace Poppler {
+ #endif
+ 			break;
+ 			}
++			case Document::CairoBackend:
++			{
++#if defined(HAVE_CAIRO)
++			CairoOutputDev *cairoOutputDev = new CairoOutputDev();
++			cairoOutputDev->startDoc(doc->getXRef (), doc->getCatalog ());
++			m_outputDev = cairoOutputDev;
++#endif
++			break;
++			}
+ 			}
+ 		}
+ 		return m_outputDev;
+diff --git a/qt4/src/poppler-qt4.h b/qt4/src/poppler-qt4.h
+index f41e5e3..8769e4f 100644
+--- a/qt4/src/poppler-qt4.h
++++ b/qt4/src/poppler-qt4.h
+@@ -669,7 +669,8 @@ delete it;
+ 	*/
+ 	enum RenderBackend {
+ 	    SplashBackend,   ///< Splash backend
+-	    ArthurBackend   ///< Arthur (Qt4) backend
++	    ArthurBackend,   ///< Arthur (Qt4) backend
++	    CairoBackend     ///< Cairo backend
+ 	};
+ 
+ 	/**
+-- 
+1.6.5.3
+

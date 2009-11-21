@@ -1,0 +1,28 @@
+From 71c5bef1d35f8f6fccfa3061b6b1fecb0cb87e4e Mon Sep 17 00:00:00 2001
+From: Paul Gideon Dann <pdgiddie@gmail.com>
+Date: Wed, 20 May 2009 14:10:16 +0100
+Subject: [PATCH 2/5] Cairo output can now be built (for Qt4) without building Glib backend
+
+---
+ CMakeLists.txt |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ba0b07c..096021d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -53,9 +53,9 @@ endif(JPEG_FOUND)
+ macro_optional_find_package(Qt3)
+ macro_optional_find_package(Qt4)
+ macro_optional_find_package(GTK)
++macro_optional_find_package(Cairo)
++set(HAVE_CAIRO ${CAIRO_FOUND})
+ if(GLIB_FOUND)
+-  macro_optional_find_package(Cairo)
+-  set(HAVE_CAIRO ${CAIRO_FOUND})
+   set(POPPLER_WITH_GDK ${GDK_FOUND})
+   if(CAIRO_FOUND)
+     set(CAIRO_REQ "cairo")
+-- 
+1.6.5.3
+
