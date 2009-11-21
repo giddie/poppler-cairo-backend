@@ -1,0 +1,5 @@
+#!/bin/bash
+
+NAME="poppler-qt4-cairo-backend"
+
+git archive HEAD --prefix=$NAME/ | bzip2 > $NAME.tar.bz2
