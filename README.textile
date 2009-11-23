@@ -16,6 +16,29 @@ The Poppler developers feel that the introduction of a dependency on Cairo to th
 
 There is a partly-implemented backend available that uses Arthur, the Qt4 2D rendering interface.  Although this would provide the perfect solution for rendering in Okular, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend would be a more elegant, long-term solution, if it were completed.
 
-h1. Git Repository
+h1. Organisation of this Repository
 
-The public repository containing these patches can be found "on Github":http://wiki.github.com/giddie/poppler-qt4-cairo-backend.  Check there for the latest version and information concerning the patchset.
+This repository tracks the official Poppler repository (git://git.freedesktop.org/git/poppler/poppler), and all Poppler's tags are present in this repository.  However, my branches are a little different:
+
+- patchset := Contains a set of patch files that may be applied to the current Poppler release.  This branch does not share any ancestor with the Poppler source and is here to provide easy access to the patch files.
+- master := Follows poppler/master.
+- qt4-lcd := Qt4-Cairo patchset applied on top of master.  This branch is rebased on top of master at regular intervals.
+- maint := Follows the maintenance branch (e.g. poppler-0.12), from which maintenance releases are tagged (e.g. poppler-0.12.1).
+- qt4-lcd-maint := Qt4-Cairo patchset applied on top of maint.  This branch is rebased on top of maint at regular intervals (usually whenever a new Poppler release is tagged.)
+
+h1. How can I generate my own patch files?
+
+# Clone the repository:
+
+bc. git clone git://github.com/giddie/poppler-qt4-cairo-backend.git
+
+#2 Change into the directory and checkout the appropriate branch.  If you're a packager, you'll probably want the maintenance branch '*qt4-lcd-maint*', which tracks Poppler's actual releases:
+
+bc. cd poppler-qt4-cairo-backend
+git checkout -b qt4-lcd-maint origin/qt4-lcd-maint
+
+#3 Generate patch files for all the commits between *maint* and the tip of the current branch:
+
+bc. git format-patch origin/maint
+
+#4 The generated patch files should be applied in numerical order to Poppler's official source package.  If you have 
