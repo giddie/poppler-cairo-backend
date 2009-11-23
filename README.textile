@@ -1,0 +1,21 @@
+h1. Definitions
+
+* *Wrapper:* A set of bindings to make using the Poppler library easier for a given toolkit.  For instance, Okular uses the Qt4 wrapper, and Evince uses the Glib wrapper.
+* *Backend:* An implementation that actually performs the rendering of the PDF.  Currently, there are two complete backends in Poppler:
+** *Splash:* a low-level backend inherited from Xpdf</li>
+** *Cairo:* performs all its rendering using the Cairo library</il>
+
+h1. Purpose of this Patchset
+
+Currently, the default backend for the Qt4 wrapper (used by Okular) is Splash.  Unfortunately, Splash does not support subpixel rendering of fonts, so those of us using KDE are stuck with somewhat ugly-looking fonts.  This patchset adds support for the Cairo backend to the Qt4 wrapper.  It also forces subpixel rendering in the Cairo backend.  The upshot of this is that we get beautiful fonts in Okular.
+
+- Before := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/before.png!
+- After := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/after.png!
+
+The Poppler developers feel that the introduction of a dependency on Cairo to the Qt4 wrapper (even though it's an optional dependency) is politically controversial, and are not willing to merge it.  For those of us who already have Cairo installed (e.g. for Firefox), and are more worried about beautiful PDFs than toolkit politics, this patchset is here for us :)
+
+There is a partly-implemented backend available that uses Arthur, the Qt4 2D rendering interface.  Although this would provide the perfect solution for rendering in Okular, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend would be a more elegant, long-term solution, if it were completed.
+
+h1. Git Repository
+
+The public repository containing these patches can be found "on Github":http://wiki.github.com/giddie/poppler-qt4-cairo-backend.  Check there for the latest version and information concerning the patchset.
