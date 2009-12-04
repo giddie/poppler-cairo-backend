@@ -1662,14 +1662,16 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   // check for embedded Type 1 font
   } else if (globalParams->getPSEmbedType1() &&
 	     font->getType() == fontType1 &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getEmbeddedFontName()) {
     psName = font->getEmbeddedFontName()->sanitizedName(gTrue /* ps mode */);
     setupEmbeddedType1Font(&fontFileID, psName);
 
   // check for embedded Type 1C font
   } else if (globalParams->getPSEmbedType1() &&
 	     font->getType() == fontType1C &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getOrigName()) {
     // use the PDF font name because the embedded font name might
     // not include the subset prefix
     psName = font->getOrigName()->sanitizedName(gTrue /* ps mode */);
@@ -1678,7 +1680,8 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   // check for embedded OpenType - Type 1C font
   } else if (globalParams->getPSEmbedType1() &&
 	     font->getType() == fontType1COT &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getOrigName()) {
     // use the PDF font name because the embedded font name might
     // not include the subset prefix
     psName = font->getOrigName()->sanitizedName(gTrue /* ps mode */);
@@ -1687,7 +1690,8 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   // check for external Type 1 font file
   } else if (globalParams->getPSEmbedType1() &&
 	     font->getType() == fontType1 &&
-	     font->getExtFontFile()) {
+	     font->getExtFontFile() &&
+	     font->getName()) {
     // this assumes that the PS font name matches the PDF font name
     psName = font->getName()->copy();
     setupExternalType1Font(font->getExtFontFile(), psName);
@@ -1696,7 +1700,8 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   } else if (globalParams->getPSEmbedTrueType() &&
 	     (font->getType() == fontTrueType ||
 	      font->getType() == fontTrueTypeOT) &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getEmbeddedFontName()) {
     psName = font->getEmbeddedFontName()->sanitizedName(gTrue /* ps mode */);
     setupEmbeddedTrueTypeFont(font, &fontFileID, psName);
 
@@ -1709,7 +1714,8 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   // check for embedded CID PostScript font
   } else if (globalParams->getPSEmbedCIDPostScript() &&
 	     font->getType() == fontCIDType0C &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getEmbeddedFontName()) {
     psName = font->getEmbeddedFontName()->sanitizedName(gTrue /* ps mode */);
     setupEmbeddedCIDType0Font(font, &fontFileID, psName);
 
@@ -1717,14 +1723,16 @@ void PSOutputDev::setupFont(GfxFont *font, Dict *parentResDict) {
   } else if (globalParams->getPSEmbedCIDTrueType() &&
 	     (font->getType() == fontCIDType2 ||
 	      font->getType() == fontCIDType2OT) &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getEmbeddedFontName()) {
     psName = font->getEmbeddedFontName()->sanitizedName(gTrue /* ps mode */);
     setupEmbeddedCIDTrueTypeFont(font, &fontFileID, psName, gTrue);
 
   // check for embedded OpenType - CID CFF font
   } else if (globalParams->getPSEmbedCIDPostScript() &&
 	     font->getType() == fontCIDType0COT &&
-	     font->getEmbeddedFontID(&fontFileID)) {
+	     font->getEmbeddedFontID(&fontFileID) &&
+	     font->getEmbeddedFontName()) {
     psName = font->getEmbeddedFontName()->sanitizedName(gTrue /* ps mode */);
     setupEmbeddedOpenTypeCFFFont(font, &fontFileID, psName);
 
