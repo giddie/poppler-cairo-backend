@@ -1,3 +1,19 @@
+Release 0.12.3
+
+	core:
+	 * Be more lenient with /Decode key on images. Bug #17439
+	 * Correctly initialize fileName in LinkGoToR. Bug #25221
+	 * Improve the reconstruction of the XRef for broken files
+	 * [Cairo backend] Do not crash on malformed files. Bug #24575
+	 * Accept Fontname if FontName is not present. KDE bug #217013
+	 * Make PSOutputDev code a bit more resilient
+	 * Fix writing of null objects. Bug #25465
+	 * [Cairo backend] Fix crash in some documents. GNOME bug #603934
+	 * Correctly initialize profileCommands in Gfx constructor
+	
+	build system:
+	 * Check for openjpeg in the C++ part as it uses bool in the header. Bug #25103
+	
 Release 0.12.2
 
 	core:
