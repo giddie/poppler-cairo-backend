@@ -1,7 +1,7 @@
-From 4c3415baf1bb97b7a09b9b0f99707fdb61750680 Mon Sep 17 00:00:00 2001
+From 9ca7dcc8ef33fa3599de5862105a44dff1d304c1 Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Thu, 21 May 2009 10:55:49 +0100
-Subject: [PATCH 5/5] Enabling slight hinting in Cairo Backend
+Subject: [PATCH 5/7] Enabling slight hinting in Cairo Backend
 
 Originally suggested at:
 http://bugs.freedesktop.org/show_bug.cgi?id=3307#c20
@@ -10,7 +10,7 @@ http://bugs.freedesktop.org/show_bug.cgi?id=3307#c20
  1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/poppler/CairoFontEngine.cc b/poppler/CairoFontEngine.cc
-index 329ff42..9adf136 100644
+index 20e6b9e..8545cb3 100644
 --- a/poppler/CairoFontEngine.cc
 +++ b/poppler/CairoFontEngine.cc
 @@ -123,7 +123,7 @@ CairoFont::getSubstitutionCorrection(GfxFont *gfxFont)
@@ -41,5 +41,5 @@ index 329ff42..9adf136 100644
    if (cairo_font_face_set_user_data (l->font_face,
  				     &_ft_cairo_key,
 -- 
-1.6.5.3
+1.6.6.1
 

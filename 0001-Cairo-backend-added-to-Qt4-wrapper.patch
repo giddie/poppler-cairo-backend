@@ -1,7 +1,7 @@
-From 25f7e0b87c4a1d9b578acbd1d5fbc41a57e8e05c Mon Sep 17 00:00:00 2001
+From ce137c226679d91a71e8973f70f697ccb6cbb535 Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 11:42:28 +0100
-Subject: [PATCH 1/5] Cairo backend added to Qt4 wrapper
+Subject: [PATCH 1/7] Cairo backend added to Qt4 wrapper
 
 ---
  qt4/src/CMakeLists.txt      |   13 ++++++++++
@@ -177,5 +177,5 @@ index f41e5e3..8769e4f 100644
  
  	/**
 -- 
-1.6.5.3
+1.6.6.1
 
