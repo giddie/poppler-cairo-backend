@@ -1,3 +1,22 @@
+Release 0.12.4
+
+	core:
+	 * Fix Uncover and Fade transition parsing. Bug #26034
+	 * Fix GfxRadialShading::GfxRadialShading. KDE bug #223359
+	 * Fix a memory leak in CairoFontEngine
+	 * Use the right matrix for the mask in drawMaskedImage() in CairoOutputDev. Bug #16906
+	 * Only assume a OC is not visible if it exists and is set to no. Bug #26532
+	 * Guard agains malloc returning NULL in SplashFTFont
+
+	qt4:
+	 * Update requirement to Qt 4.4
+	
+	glib:
+	 * Use PDFDoc(wchar_t *, ...) on Windows. Bug #25032
+
+	build system:
+	 * fix typo: "MULTITHREAD" -> "MULTITHREADED" in CMake
+
 Release 0.12.3
 
 	core:
