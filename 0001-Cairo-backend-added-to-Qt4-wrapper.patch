@@ -1,15 +1,15 @@
-From ce137c226679d91a71e8973f70f697ccb6cbb535 Mon Sep 17 00:00:00 2001
+From 5a3ff849416c911e6ba0f26cfd7b262df6e2e3bd Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 11:42:28 +0100
-Subject: [PATCH 1/7] Cairo backend added to Qt4 wrapper
+Subject: [PATCH 1/5] Cairo backend added to Qt4 wrapper
 
 ---
- qt4/src/CMakeLists.txt      |   13 ++++++++++
+ qt4/src/CMakeLists.txt      |   13 +++++++++++
  qt4/src/poppler-document.cc |    1 +
- qt4/src/poppler-page.cc     |   56 +++++++++++++++++++++++++++++++++++++++++++
- qt4/src/poppler-private.h   |   12 +++++++++
+ qt4/src/poppler-page.cc     |   47 +++++++++++++++++++++++++++++++++++++++++++
+ qt4/src/poppler-private.h   |   12 +++++++++++
  qt4/src/poppler-qt4.h       |    3 +-
- 5 files changed, 84 insertions(+), 1 deletions(-)
+ 5 files changed, 75 insertions(+), 1 deletions(-)
 
 diff --git a/qt4/src/CMakeLists.txt b/qt4/src/CMakeLists.txt
 index f6c7b16..2be9803 100644
@@ -59,7 +59,7 @@ index c2563f4..87a611c 100644
          return ret;
      }
 diff --git a/qt4/src/poppler-page.cc b/qt4/src/poppler-page.cc
-index 9e889ce..38d77d3 100644
+index 9e889ce..74912a3 100644
 --- a/qt4/src/poppler-page.cc
 +++ b/qt4/src/poppler-page.cc
 @@ -31,6 +31,7 @@
@@ -70,7 +70,7 @@ index 9e889ce..38d77d3 100644
  #include <PDFDoc.h>
  #include <Catalog.h>
  #include <Form.h>
-@@ -273,6 +274,61 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
+@@ -273,6 +274,52 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
  #endif
        break;
      }
@@ -80,8 +80,7 @@ index 9e889ce..38d77d3 100644
 +      CairoOutputDev *output_dev =
 +        static_cast<CairoOutputDev *>(m_page->parentDoc->getOutputDev());
 +      double width, height;
-+      int cairo_width, cairo_height, cairo_rowstride, rotate;
-+      unsigned char *cairo_data;
++      int buffer_width, buffer_height, rotate;
 +      cairo_surface_t *surface;
 +      cairo_t *cairo;
 +
@@ -96,18 +95,16 @@ index 9e889ce..38d77d3 100644
 +
 +      const double xscale = xres / 72.0;
 +      const double yscale = yres / 72.0;
-+      cairo_width = (int) ceil(width * xscale);
-+      cairo_height = (int) ceil(height * yscale);
++      buffer_width = (int) ceil(width * xscale);
++      buffer_height = (int) ceil(height * yscale);
 +
-+      cairo_rowstride = cairo_width * 4;
-+      cairo_data = (Guchar *) gmallocn (cairo_height, cairo_rowstride);
-+      // Never transparent
-+      memset (cairo_data, 0xff, cairo_height * cairo_rowstride);
++      img = QImage(buffer_width, buffer_height, QImage::Format_ARGB32);
++      img.fill(Qt::white);  // Never transparent
 +
-+      surface = cairo_image_surface_create_for_data(cairo_data,
++      surface = cairo_image_surface_create_for_data(img.bits(),
 +                CAIRO_FORMAT_ARGB32,
-+                cairo_width, cairo_height,
-+                cairo_rowstride);
++                buffer_width, buffer_height,
++                img.bytesPerLine());
 +
 +      cairo = cairo_create (surface);
 +      output_dev->setCairo (cairo);
@@ -116,16 +113,10 @@ index 9e889ce..38d77d3 100644
 +        output_dev, m_page->index + 1, xres, yres, rotation, false, true,
 +        false, x, y, w, h);
 +
-+      // construct a qimage SHARING the raw bitmap data in memory
-+      QImage tmpimg(cairo_data, cairo_width, cairo_height,
-+                    QImage::Format_ARGB32);
-+      img = tmpimg.copy();
-+
 +      // Clean up
 +      output_dev->setCairo(NULL);
-+      cairo_surface_destroy (surface);
 +      cairo_destroy (cairo);
-+      gfree(cairo_data);
++      cairo_surface_destroy (surface);
 +#endif
 +      break;
 +    }
@@ -177,5 +168,5 @@ index f41e5e3..8769e4f 100644
  
  	/**
 -- 
-1.6.6.1
+1.7.1
 
