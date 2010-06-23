@@ -1,18 +1,18 @@
-From 5a3ff849416c911e6ba0f26cfd7b262df6e2e3bd Mon Sep 17 00:00:00 2001
+From 6ee4ad9757baf4c489ba2506d97263b32b1c3234 Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 11:42:28 +0100
-Subject: [PATCH 1/5] Cairo backend added to Qt4 wrapper
+Subject: [PATCH 1/4] Cairo backend added to Qt4 wrapper
 
 ---
- qt4/src/CMakeLists.txt      |   13 +++++++++++
+ qt4/src/CMakeLists.txt      |   14 ++++++++++++
  qt4/src/poppler-document.cc |    1 +
  qt4/src/poppler-page.cc     |   47 +++++++++++++++++++++++++++++++++++++++++++
  qt4/src/poppler-private.h   |   12 +++++++++++
  qt4/src/poppler-qt4.h       |    3 +-
- 5 files changed, 75 insertions(+), 1 deletions(-)
+ 5 files changed, 76 insertions(+), 1 deletions(-)
 
 diff --git a/qt4/src/CMakeLists.txt b/qt4/src/CMakeLists.txt
-index f6c7b16..2be9803 100644
+index 8ad3fbc..7736a63 100644
 --- a/qt4/src/CMakeLists.txt
 +++ b/qt4/src/CMakeLists.txt
 @@ -5,6 +5,10 @@ include_directories(
@@ -20,25 +20,26 @@ index f6c7b16..2be9803 100644
    ${CMAKE_CURRENT_BINARY_DIR}
  )
 +if (HAVE_CAIRO)
-+  include_directories(${CAIRO_INCLUDES})
++  include_directories(${CAIRO_INCLUDE_DIRS})
 +  add_definitions(${CAIRO_CFLAGS})
 +endif (HAVE_CAIRO)
  
  set(poppler_qt4_SRCS
    poppler-annotation.cc
-@@ -31,10 +35,19 @@ if (ENABLE_SPLASH)
-     ${CMAKE_SOURCE_DIR}/poppler/ArthurOutputDev.cc
-   )
- endif (ENABLE_SPLASH)
+@@ -27,10 +31,20 @@ set(poppler_qt4_SRCS
+   poppler-page-transition.cc
+   ${CMAKE_SOURCE_DIR}/poppler/ArthurOutputDev.cc
+ )
 +if (HAVE_CAIRO)
 +  set(poppler_qt4_SRCS ${poppler_qt4_SRCS}
 +    ${CMAKE_SOURCE_DIR}/poppler/CairoOutputDev.cc
++    ${CMAKE_SOURCE_DIR}/poppler/CairoRescaleBox.cc
 +    ${CMAKE_SOURCE_DIR}/poppler/CairoFontEngine.cc
 +  )
 +endif(HAVE_CAIRO)
  qt4_automoc(${poppler_qt4_SRCS})
  add_library(poppler-qt4 SHARED ${poppler_qt4_SRCS})
- set_target_properties(poppler-qt4 PROPERTIES VERSION 3.2.0 SOVERSION 3)
+ set_target_properties(poppler-qt4 PROPERTIES VERSION 3.3.0 SOVERSION 3)
  target_link_libraries(poppler-qt4 poppler ${QT4_QTCORE_LIBRARY} ${QT4_QTGUI_LIBRARY} ${QT4_QTXML_LIBRARY})
 +if (HAVE_CAIRO)
 +  target_link_libraries(poppler-qt4 ${CAIRO_LIBRARIES})
@@ -47,19 +48,19 @@ index f6c7b16..2be9803 100644
  target_link_libraries(poppler-qt4 poppler ${poppler_LIBS})
  endif(MSVC)
 diff --git a/qt4/src/poppler-document.cc b/qt4/src/poppler-document.cc
-index c2563f4..87a611c 100644
+index 41d35b6..922a9a6 100644
 --- a/qt4/src/poppler-document.cc
 +++ b/qt4/src/poppler-document.cc
-@@ -500,6 +500,7 @@ namespace Poppler {
- #if defined(HAVE_SPLASH)
+@@ -501,6 +501,7 @@ namespace Poppler {
          ret << Document::SplashBackend;
+ #endif
          ret << Document::ArthurBackend;
 +        ret << Document::CairoBackend;
- #endif
          return ret;
      }
+ 
 diff --git a/qt4/src/poppler-page.cc b/qt4/src/poppler-page.cc
-index 9e889ce..74912a3 100644
+index 6dbf50f..69c1e0f 100644
 --- a/qt4/src/poppler-page.cc
 +++ b/qt4/src/poppler-page.cc
 @@ -31,6 +31,7 @@
@@ -70,8 +71,8 @@ index 9e889ce..74912a3 100644
  #include <PDFDoc.h>
  #include <Catalog.h>
  #include <Form.h>
-@@ -273,6 +274,52 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
- #endif
+@@ -269,6 +270,52 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
+       img = tmpimg;
        break;
      }
 +    case Poppler::Document::CairoBackend:
@@ -154,10 +155,10 @@ index f148dbc..da0440b 100644
  		}
  		return m_outputDev;
 diff --git a/qt4/src/poppler-qt4.h b/qt4/src/poppler-qt4.h
-index f41e5e3..8769e4f 100644
+index 117dc43..fa1afd1 100644
 --- a/qt4/src/poppler-qt4.h
 +++ b/qt4/src/poppler-qt4.h
-@@ -669,7 +669,8 @@ delete it;
+@@ -681,7 +681,8 @@ delete it;
  	*/
  	enum RenderBackend {
  	    SplashBackend,   ///< Splash backend
