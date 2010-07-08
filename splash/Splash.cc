@@ -43,7 +43,7 @@
 #include "Splash.h"
 
 // to get the unlikely definition
-#include "Object.h"
+#include "poppler/Object.h"
 
 //------------------------------------------------------------------------
 
