@@ -1,3 +1,26 @@
+Release 0.14.1
+
+	core:
+	 * Add ObjectStream caching, makes opening some files ten times faster (Bug #26759)
+	 * Fix crash when writing to negative coordinates (Bug #28480)
+	 * Check objects are the type we want them to be when parsing GfxICCBasedColorSpace
+	 * Optimize Splash::compositeBackground
+	 * Optimize color space calculations by using sqrt instead of pow 0.5
+	 * Fix crash in JBIG2Stream with malformed documents
+	
+	build system:
+	 * Make sure we ship two needed cmake files
+	 * Do not distribute glib/poppler-features.h and poppler/poppler-config.h
+	 * Improve compilation with Sun Studio
+	 * Fix linking of the cpp frontend when using autotools
+	
+	glib:
+	 * Fix links/annots area for some documents (Bug #28588)
+	 * Fix poppler_page_find_tex() when called more than once (Bug #27927)
+	
+	utils:
+	 * Add -cropbox to pdftoppm manual
+
 Release 0.14.0
 
 	core:
