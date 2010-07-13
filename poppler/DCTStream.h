@@ -69,6 +69,7 @@ public:
 private:
   void init();
 
+  int colorXform;
   JSAMPLE *current;
   JSAMPLE *limit;
   struct jpeg_decompress_struct cinfo;
