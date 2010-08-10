@@ -1,3 +1,22 @@
+Release 0.14.2
+
+	core:
+	 * Fix rendering of some documents involving tilingPatternFill in the cairo output device
+	 * Improve rendering of some annotations
+	 * Handle ColorTransform in DCT streams when using libjpeg (Bug #28873)
+	 * Fix crash in the ps output device in some files (KDE Bug #246269)
+	 * Fix crash in some malformed files (Bug #28842)
+	
+	build system:
+	 * Improve build on windows
+	 * Add uninstalled .pc file support when using autoconf
+	
+	glib:
+	 * Fix a crash when a layer doesn't have a name (Bug #28842)
+	
+	utils:
+	 * Fix padding of names in pdftoppm
+
 Release 0.14.1
 
 	core:
