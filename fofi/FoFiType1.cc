@@ -31,7 +31,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "goo/gmem.h"
-#include "goo/GooLikely.h"
 #include "FoFiEncodings.h"
 #include "FoFiType1.h"
 #include "poppler/Error.h"
@@ -244,7 +243,7 @@ void FoFiType1::parse() {
 		code = code * 8 + (*p2 - '0');
 	      }
 	    }
-	    if (likely(code < 256 && code >= 0)) {
+	    if (code < 256 && code >= 0) {
 	      for (p = p2; *p == ' ' || *p == '\t'; ++p) ;
 	      if (*p == '/') {
 		++p;
