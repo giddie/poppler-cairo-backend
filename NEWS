@@ -1,3 +1,17 @@
+Release 0.14.4
+
+	core:
+	 * Set initial state of optional content groups based on BaseState field
+	 * Fix multiple crashes in malformed PDF files
+	 * Fix memory leak in in malformed PDF files
+	 * Fix memory leak in the Catalog names
+	 * Fix uninitialized uses on DCTScanInfo
+	 * Fix a crash when drawing square/circle annots without a border (Bug #30580)
+
+	glib:
+	 * Fix layers array generation when it contains multiple arrays
+	 * Fix a crash when building layer actions (Bug #30106)
+
 Release 0.14.3
 
 	core:
