@@ -1,14 +1,14 @@
-From c4b1ff3a65d480da875b8ced6281eddd0c41b73e Mon Sep 17 00:00:00 2001
+From d865c4b2de58ebb088cb087f1e0c78833cf03f31 Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 13:06:48 +0100
-Subject: [PATCH 3/4] Forcing subpixel rendering in Cairo backend
+Subject: [PATCH 3/3] Forcing subpixel rendering in Cairo backend
 
 ---
  poppler/CairoOutputDev.cc |    7 +++++++
  1 files changed, 7 insertions(+), 0 deletions(-)
 
 diff --git a/poppler/CairoOutputDev.cc b/poppler/CairoOutputDev.cc
-index 01ff92c..5e6b262 100644
+index 65fac76..92ebffc 100644
 --- a/poppler/CairoOutputDev.cc
 +++ b/poppler/CairoOutputDev.cc
 @@ -183,6 +183,13 @@ void CairoOutputDev::setCairo(cairo_t *cairo)
