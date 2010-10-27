@@ -2950,6 +2950,7 @@ void SplashOutputDev::endTransparencyGroup(GfxState *state) {
   double *ctm;
 
   // restore state
+  delete bitmap;
   delete splash;
   bitmap = transpGroupStack->origBitmap;
   splash = transpGroupStack->origSplash;
