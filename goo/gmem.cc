@@ -253,8 +253,12 @@ inline static void *greallocn(void *p, int nObjs, int objSize, bool checkoverflo
     throw GMemException();
 #else
     fprintf(stderr, "Bogus memory allocation size\n");
-    if (checkoverflow) return NULL;
-    else exit(1);
+    if (checkoverflow) {
+      gfree(p);
+      return NULL;
+    } else {
+      exit(1);
+    }
 #endif
   }
   return grealloc(p, n, checkoverflow);
