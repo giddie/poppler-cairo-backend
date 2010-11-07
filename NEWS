@@ -1,3 +1,13 @@
+Release 0.14.5
+
+	core:
+	 * Fix calculation of the size of some pages (Bug #30784)
+	 * Fix crash in the Cairo backend in documents with invalid type 3 fonts
+	 * Fix crashes in broken documents
+
+	build system:
+	 * Remove -ansi flag for cywin and mingw
+
 Release 0.14.4
 
 	core:
