@@ -1,3 +1,21 @@
+Release 0.16.1
+	core:
+	 * Fix colorspace issues in the Cairo backend (Bug #32746)
+	 * Remove declaration of function without implementation
+	 * Do not crash in case jpeg_create_decompress fails (Bug #32890)
+	 * Fix variable access mismatch (Bug #33063)
+	 * Fix converting some pdf to ps with -level1sep (Bug #32365)
+	 * Fix line selection, dont check y for Line selections
+	 * Include zlib header in PNGWriter.cc
+	 * Fix leak in Splash backend when doing axial shaded fills
+
+	glib:
+	 * Use NULL instead of FALSE for functions returning a pointer
+	 * Fix memory leak in poppler_page_get_text_layout() for pages with no text
+
+	qt4:
+	 * Fix unicodeToQString() to correctly decode the Unicode sequence
+
 Release 0.16.0
 
 	core:
