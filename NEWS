@@ -8,6 +8,7 @@ Release 0.16.1
 	 * Fix line selection, dont check y for Line selections
 	 * Include zlib header in PNGWriter.cc
 	 * Fix leak in Splash backend when doing axial shaded fills
+	 * Fix label to index conversion on multiple prefixes
 
 	glib:
 	 * Use NULL instead of FALSE for functions returning a pointer
