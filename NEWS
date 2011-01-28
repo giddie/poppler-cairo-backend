@@ -1,3 +1,10 @@
+Release 0.16.2
+	core:
+	 * Fix text extraction for some files
+
+	qt4:
+	 * Fix crash regression in unicodeToQString
+
 Release 0.16.1
 	core:
 	 * Fix colorspace issues in the Cairo backend (Bug #32746)
