@@ -871,8 +871,8 @@ poppler_page_render_selection_to_pixbuf (PopplerPage           *page,
 /**
  * poppler_page_get_thumbnail_size:
  * @page: A #PopplerPage
- * @width: return location for width
- * @height: return location for height
+ * @width: (out) return location for width
+ * @height: (out) return location for height
  *
  * Returns %TRUE if @page has a thumbnail associated with it.  It also
  * fills in @width and @height with the width and height of the
@@ -2111,7 +2111,7 @@ poppler_page_get_crop_box (PopplerPage *page, PopplerRectangle *rect)
  * poppler_page_get_text_layout:
  * @page: A #PopplerPage
  * @rectangles: (out) (array length=n_rectangles) (transfer container): return location for an array of #PopplerRectangle
- * @n_rectangles: length of returned array
+ * @n_rectangles: (out) length of returned array
  *
  * Obtains the layout of the text as a list of #PopplerRectangle
  * This array must be freed with g_free () when done.
