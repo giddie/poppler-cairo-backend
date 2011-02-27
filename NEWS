@@ -18,7 +18,7 @@ Release 0.16.3
 	 * Fix crash regression in unicodeToQString (again)
 
 	utils:
-	 * Do not crash when using -bbox
+	 * pdftotext: Do not crash when using -bbox
 
 Release 0.16.2
 	core:
