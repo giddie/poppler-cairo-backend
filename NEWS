@@ -1,4 +1,4 @@
-Release 0.16.2
+Release 0.16.3
 	core:
 	 * Increase precision in PS output device
 	 * Workaround bug when converting pdf to ps with level1 (Bug #31926)
