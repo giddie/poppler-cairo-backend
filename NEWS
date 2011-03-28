@@ -1,24 +1,39 @@
+Release 0.16.4
+        core:
+         * Small improvements in Annot parsing
+
+        glib:
+         * Add g_return macros to make sure index is correct in form field choice methods
+         * Fix a crash when a choice form field has no items selected in glib-demo
+
+        utils:
+         * Small fixes to the pdftohtml manpage
+         * Fix copyright years
+
+        qt4:
+         * Fix caption of push button fields
+
 Release 0.16.3
-	core:
-	 * Increase precision in PS output device
-	 * Workaround bug when converting pdf to ps with level1 (Bug #31926)
-	 * Fix crash in Splash output device in some broken pdf
-	 * Fix infinite loop in some broken files
-	 * Fix rendering of some substituted fonts (Bug #34522)
-	 * Do not ask Freetype for 0x0 fonts in Splash output device (Bug #34602)
-	 * Don't assume y1 > y3 for points of a highlight annotation (Gnome Bug #643028)
-	 * Handle fontCIDType2OT when creating freetype font in Cairo output device (Gnome Bug #643273)
-	 * Fix crash in some pdf that use ICC color space (Bug #34357)
+        core:
+         * Increase precision in PS output device
+         * Workaround bug when converting pdf to ps with level1 (Bug #31926)
+         * Fix crash in Splash output device in some broken pdf
+         * Fix infinite loop in some broken files
+         * Fix rendering of some substituted fonts (Bug #34522)
+         * Do not ask Freetype for 0x0 fonts in Splash output device (Bug #34602)
+         * Don't assume y1 > y3 for points of a highlight annotation (Gnome Bug #643028)
+         * Handle fontCIDType2OT when creating freetype font in Cairo output device (Gnome Bug #643273)
+         * Fix crash in some pdf that use ICC color space (Bug #34357)
 
-	glib:
-	 * Don't use an uninitialized local variable in demo
-	 * Add some introspection markers
+        glib:
+         * Don't use an uninitialized local variable in demo
+         * Add some introspection markers
 
-	qt4:
-	 * Fix crash regression in unicodeToQString (again)
+        qt4:
+         * Fix crash regression in unicodeToQString (again)
 
-	utils:
-	 * pdftotext: Do not crash when using -bbox
+        utils:
+         * pdftotext: Do not crash when using -bbox
 
 Release 0.16.2
 	core:
