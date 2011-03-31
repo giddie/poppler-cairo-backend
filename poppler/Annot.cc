@@ -4247,6 +4247,7 @@ void AnnotScreen::initialize(XRef *xrefA, Catalog *catalog, Dict* dict) {
       ok = gFalse;
     }
   }
+  obj1.free();
 
   dict->lookup("AA", &additionAction);
 
