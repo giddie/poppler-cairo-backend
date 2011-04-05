@@ -2,8 +2,8 @@ h1. Definitions
 
 * *Wrapper:* A set of bindings to make using the Poppler library easier for a given toolkit.  For instance, Okular uses the Qt4 wrapper, and Evince uses the Glib wrapper.
 * *Backend:* An implementation that actually performs the rendering of the PDF.  Currently, there are two complete backends in Poppler:
-** *Splash:* a low-level backend inherited from Xpdf</li>
-** *Cairo:* performs all its rendering using the Cairo library</il>
+** *Splash:* a low-level backend inherited from Xpdf
+** *Cairo:* performs all its rendering using the Cairo library
 
 h1. Purpose of this Patchset
 
