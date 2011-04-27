@@ -1,3 +1,14 @@
+Release 0.16.5
+        core:
+         * Fix a memleak in AnnotScreen::initialize
+         * Properly initialize pageObjectNum to 0. Bug #35925
+
+        utils:
+         * pdftotext: bbox coordinates are relative to MediaBox size, not CropBox size
+
+        cpp:
+         * Fix page_transition::operator=
+
 Release 0.16.4
         core:
          * Small improvements in Annot parsing
