@@ -1,3 +1,10 @@
+Release 0.16.6
+        core:
+         * Fix crash when getting the JavaScript (KDE Bug #268816)
+
+        qt4:
+         * Fix unicode parsing of page labels (KDE Bug #274055)
+
 Release 0.16.5
         core:
          * Fix a memleak in AnnotScreen::initialize
