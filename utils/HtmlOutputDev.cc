@@ -1413,6 +1413,8 @@ void HtmlOutputDev::doProcessLink(Link* link){
 
 GooString* HtmlOutputDev::getLinkDest(Link *link,Catalog* catalog){
   char *p;
+  if (!link->getAction())
+    return new GooString();
   switch(link->getAction()->getKind()) 
   {
       case actionGoTo:
