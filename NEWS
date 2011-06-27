@@ -1,3 +1,11 @@
+Release 0.16.7
+        core:
+         * Fix memory leak on documents whose Catalog has no Pages entry
+         * Check Catalog is a dictionary before using it (KDE Bug #274888)
+
+        utils:
+         * pdftohtml: Do not crash in links without action
+
 Release 0.16.6
         core:
          * Fix crash when getting the JavaScript (KDE Bug #268816)
