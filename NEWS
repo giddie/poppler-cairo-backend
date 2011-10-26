@@ -1,3 +1,24 @@
+Release 0.18.1
+        core:
+         * PSOutputDev: Output PS that does not confuse libspectre
+         * PSOutputDev: Fix tiling pattern fill matrix. Bug #41374
+         * PSOutputDev: Emit non repeating patterns just once
+         * PSOutputDev: Fix uncolored tiling patterns. Bug #41462
+         * CairoOutputDev: Fix crash when using poppler_page_get_image()
+         * CairoOutputDev: Fix various setSoftMask bugs. Bug #41005
+        
+        utils:
+         * pdftocairo: Flush/close files one we are done using them
+         * pdftocairo: Compile in Windows
+        
+        build system:
+         * CMake: Fix typo in option description
+         * CMake: Correctly include fontconfig include dir
+         * Remove poppler-cairo dependency from poppler-glib pkg-config file
+        
+        qt4:
+         * Minor fixes in documentation
+
 Release 0.18.0
         core:
          * Fix small memory leak when dealing with marked content
