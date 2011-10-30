@@ -904,7 +904,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Make sure firstPage is always used so that beginDocument() is called
-  if ((printOnlyEven && pg % 2 == 0) || (printOnlyOdd && pg % 2 == 1))
+  if ((printOnlyEven && firstPage % 2 == 0) || (printOnlyOdd && firstPage % 2 == 1))
     firstPage++;
 
   cairoOut = new CairoOutputDev();
