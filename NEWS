@@ -1,3 +1,20 @@
+Release 0.18.2
+        core:
+         * Fix leak in GooString when resizing to a smaller string
+         * Fix crash if failing to parse the colorspace. Bug #42793
+         * Make GfxColorSpace::parse accept dicts
+
+        qt4:
+         * Use PDFDoc(wchar_t *, ...) on Windows. Bug #35378
+         * Add missing include
+         * Minor fixes in documentation
+
+        utils:
+         * pdftocairo: Fix crash when rendering only odd/even pages in a printing format
+        
+        build system:
+         * Fix pkg-config files
+        
 Release 0.18.1
         core:
          * PSOutputDev: Output PS that does not confuse libspectre
