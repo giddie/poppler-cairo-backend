@@ -1,3 +1,18 @@
+Release 0.18.3
+        core:
+         * Do not fail if we are trying to save a file with Encrypt that has not been modified. KDE Bug #288045
+         * Include .otf fonts when finding substitute fonts. Bug #44412
+         * Fix stack overflow in PDFDoc::markObject(). Bug #44660
+         * Include strings.h as we use memcpy. Bug #43558
+
+        utils:
+         * pdfunite: Properly initialize globalParams. Bug #44659
+         * pdfseparate: Properly initialize globalParams
+         * Fix iniliazialization of GooString arguments
+
+        build system:
+         * autoconf: Check for cairo-ft and other cairo backends. Bug #43969
+        
 Release 0.18.2
         core:
          * Fix leak in GooString when resizing to a smaller string
