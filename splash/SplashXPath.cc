@@ -13,6 +13,7 @@
 //
 // Copyright (C) 2010 Paweł Wiejacha <pawel.wiejacha@gmail.com>
 // Copyright (C) 2010, 2011 Albert Astals Cid <aacid@kde.org>
+// Copyright (C) 2012 Alexander Saprykin <xelfium@gmail.com>
 //
 // To see a description of the changes please see the Changelog file that
 // came with your tarball or type make ChangeLog if you are building from git
