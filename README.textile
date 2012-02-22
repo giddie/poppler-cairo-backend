@@ -2,8 +2,8 @@ h1. Definitions
 
 * *Wrapper:* A set of bindings to make using the Poppler library easier for a given toolkit.  For instance, Okular uses the Qt4 wrapper, and Evince uses the Glib wrapper.
 * *Backend:* An implementation that actually performs the rendering of the PDF.  Currently, there are two complete backends in Poppler:
-** *Splash:* a low-level backend inherited from Xpdf
-** *Cairo:* performs all its rendering using the Cairo library
+** *Splash:* a low-level backend inherited from Xpdf.  This code is getting old now, and it's difficult to introduce major changes (such as introducing subpixel rendering).
+** *Cairo:* performs all its rendering using the Cairo library.  This is where most of the interesting development is happening now.
 
 h1. Purpose of this Patchset
 
@@ -12,9 +12,11 @@ Currently, the default backend for the Qt4 wrapper (used by Okular) is Splash.  
 - Before := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/before.png!
 - After := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/after.png!
 
-The Poppler developers feel that the introduction of a dependency on Cairo to the Qt4 wrapper (even though it's an optional dependency) is politically controversial, and are not willing to merge it.  For those of us who already have Cairo installed (e.g. for Firefox), and are more worried about beautiful PDFs than toolkit politics, this patchset is here for us :)
+h1. Why isn't this is Poppler already?
 
-There is a partly-implemented backend available that uses Arthur, the Qt4 2D rendering interface.  Although this would provide the perfect solution for rendering in Okular, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend would be a more elegant, long-term solution, if it were completed.
+The Poppler developers feel that the introduction of a dependency on Cairo to the Qt4 wrapper (even an optional dependency) is politically controversial, and are not willing to merge it.  For those of us who already have Cairo installed (e.g. for Firefox, Inkscape, Scribus, etc...), and are more worried about beautiful PDFs than toolkit politics, this patchset is here for us :)  If you'd like to join the effort in convincing the developers that this is worthwhile, feel free to wade in on "the Bugzilla report":https://bugs.freedesktop.org/show_bug.cgi?id=25240.
+
+There is a partly-implemented backend available in Poppler that uses Arthur, the Qt4 2D rendering interface.  Sadly, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend might be a more elegant, long-term Qt-only solution, if it were completed.
 
 h1. Organisation of this Repository
 
