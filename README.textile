@@ -43,4 +43,4 @@ git checkout -b qt4-lcd-maint origin/qt4-lcd-maint
 
 bc. git format-patch origin/maint
 
-#4 The generated patch files should be applied in numerical order to Poppler's official source package.  If you have 
+#4 The generated patch files should be applied in numerical order to Poppler's official source package.  If you have difficulty, please get in touch--I'd be more than happy to help :)
