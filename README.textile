@@ -34,10 +34,10 @@ h1. How can I generate my own patch files?
 
 bc. git clone git://github.com/giddie/poppler-qt4-cairo-backend.git
 
-#2 Change into the directory and checkout the appropriate branch.  If you're a packager, you'll probably want the maintenance branch '*qt4-lcd-maint*', which tracks Poppler's actual releases:
+#2 Change into the directory and checkout the the *qt4-lcd* branch, which tracks Poppler's actual releases:
 
 bc. cd poppler-qt4-cairo-backend
-git checkout -b qt4-lcd-maint origin/qt4-lcd-maint
+git checkout -b qt4-lcd origin/qt4-lcd
 
 #3 Generate patch files for all the commits between *maint* and the tip of the current branch:
 
