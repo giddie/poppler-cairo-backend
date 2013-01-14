@@ -1,17 +1,17 @@
-From 70a558a4e8d08629d88d2b5f19738b51dae83263 Mon Sep 17 00:00:00 2001
+From 482ef37f0e7a65e29ac00e686461c26e339d6f5f Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 13:06:48 +0100
 Subject: [PATCH 3/4] Forcing subpixel rendering in Cairo backend
 
 ---
- poppler/CairoOutputDev.cc |    7 +++++++
+ poppler/CairoOutputDev.cc | 7 +++++++
  1 file changed, 7 insertions(+)
 
 diff --git a/poppler/CairoOutputDev.cc b/poppler/CairoOutputDev.cc
-index b70183e..8ca64dd 100644
+index 441ca45..ab4cf87 100644
 --- a/poppler/CairoOutputDev.cc
 +++ b/poppler/CairoOutputDev.cc
-@@ -197,6 +197,13 @@ void CairoOutputDev::setCairo(cairo_t *cairo)
+@@ -198,6 +198,13 @@ void CairoOutputDev::setCairo(cairo_t *cairo)
    }
    if (cairo != NULL) {
      this->cairo = cairo_reference (cairo);
@@ -26,5 +26,5 @@ index b70183e..8ca64dd 100644
  	//XXX: is this sufficient? could we miss changes to the matrix somehow?
  	cairo_get_matrix(cairo, &orig_matrix);
 -- 
-1.7.10.2
+1.8.1
 
