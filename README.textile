@@ -23,10 +23,8 @@ h1. Organisation of this Repository
 This repository tracks the official Poppler repository (git://git.freedesktop.org/git/poppler/poppler), and all Poppler's tags are present in this repository.  However, my branches are a little different:
 
 - patchset := Contains a set of patch files that may be applied to the current Poppler release.  This branch does not share any ancestor with the Poppler source and is here to provide easy access to the patch files.
-- master := Follows poppler/master.
-- qt4-lcd := Qt4-Cairo patchset applied on top of master.  This branch is rebased on top of master at regular intervals.
 - maint := Follows the maintenance branch (e.g. poppler-0.12), from which maintenance releases are tagged (e.g. poppler-0.12.1).
-- qt4-lcd-maint := Qt4-Cairo patchset applied on top of maint.  This branch is rebased on top of maint at regular intervals (usually whenever a new Poppler release is tagged.)
+- qt4-lcd := Qt4-Cairo patchset applied on top of maint.  This branch is rebased on top of maint whenever a new Poppler release is tagged.
 
 h1. How can I generate my own patch files?
 
