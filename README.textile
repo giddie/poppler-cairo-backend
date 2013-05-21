@@ -26,6 +26,17 @@ This repository tracks the official Poppler repository (git://git.freedesktop.or
 - maint := Follows the maintenance branch (e.g. poppler-0.12), from which maintenance releases are tagged (e.g. poppler-0.12.1).
 - qt4-lcd := Qt4-Cairo patchset applied on top of maint.  This branch is rebased on top of maint whenever a new Poppler release is tagged.
 
+h1. Autotools / CMake
+
+IMPORTANT: I test this patchset with CMake.  It's been reported that it breaks the Autotools build.  That's not something I'm very interested in fixing, but if you are, I'll happily merge a fix.  In the mean time, you'll need to build with CMake:
+
+$ cd &lt;source-dir&gt;
+$ mkdir build
+$ cd build
+$ cmake ..
+$ ccmake ..   # (for any configuration tweaks)
+$ make
+
 h1. How can I generate my own patch files?
 
 # Clone the repository:
