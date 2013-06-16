@@ -1,3 +1,17 @@
+Release 0.22.5
+        core:
+         * PSOutputDev: Make sure that Title: doesn't contain \n or \r (Bug #63862)
+         * Fix slowlyness reading malformed files (Bug #46703)
+         * Fix infinite loop while feeding wrong data in stdin (Bug #64967)
+         * Fix crash on malformed file (Bug #65221)
+         * Fix mismatched delete (Bug #65553)
+
+        qt4:
+         * Fix mismatched delete (Bug #65551)
+
+        utils:
+         * pdftohtml: Fix memory leak 
+
 Release 0.22.4
         core:
          * Always consider a softmask transfer function (Bug #63587)
