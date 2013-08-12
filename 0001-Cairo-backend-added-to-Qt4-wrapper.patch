@@ -1,4 +1,4 @@
-From 5660e546cecf08da0e5cd13f06d5b402a66ae205 Mon Sep 17 00:00:00 2001
+From 80664ec947a210f2e821115563552a4284e9e7b6 Mon Sep 17 00:00:00 2001
 From: Paul Gideon Dann <pdgiddie@gmail.com>
 Date: Wed, 20 May 2009 11:42:28 +0100
 Subject: [PATCH 1/4] Cairo backend added to Qt4 wrapper
@@ -12,7 +12,7 @@ Subject: [PATCH 1/4] Cairo backend added to Qt4 wrapper
  5 files changed, 79 insertions(+), 1 deletion(-)
 
 diff --git a/qt4/src/CMakeLists.txt b/qt4/src/CMakeLists.txt
-index dff7aa6..ce5c2bf 100644
+index 59953ed..bd661f0 100644
 --- a/qt4/src/CMakeLists.txt
 +++ b/qt4/src/CMakeLists.txt
 @@ -6,6 +6,11 @@ include_directories(
@@ -29,7 +29,7 @@ index dff7aa6..ce5c2bf 100644
    poppler-document.cc
 @@ -28,10 +33,20 @@ set(poppler_qt4_SRCS
    poppler-media.cc
-   ${CMAKE_SOURCE_DIR}/poppler/ArthurOutputDev.cc
+   ArthurOutputDev.cc
  )
 +if (HAVE_CAIRO)
 +  set(poppler_qt4_SRCS ${poppler_qt4_SRCS}
@@ -179,5 +179,5 @@ index 69e9c49..4470ac9 100644
    string(REPLACE "-" "" test_name ${exe})
    set(${test_name}_SOURCES
 -- 
-1.8.3.1
+1.8.3.4
 
