@@ -1054,7 +1054,8 @@ delete it;
 	*/
 	enum RenderBackend {
 	    SplashBackend,   ///< Splash backend
-	    ArthurBackend   ///< Arthur (Qt) backend
+	    ArthurBackend,   ///< Arthur (Qt) backend
+	    CairoBackend     ///< Cairo backend
 	};
 
 	/**

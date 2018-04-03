@@ -7,6 +7,11 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+if (HAVE_CAIRO)
+  include_directories(${CAIRO_INCLUDE_DIRS})
+  add_definitions(${CAIRO_CFLAGS})
+endif (HAVE_CAIRO)
+
 set(poppler_qt5_SRCS
   poppler-annotation.cc
   poppler-document.cc
@@ -29,6 +34,13 @@ set(poppler_qt5_SRCS
   poppler-media.cc
   ArthurOutputDev.cc
 )
+if (HAVE_CAIRO)
+  set(poppler_qt5_SRCS ${poppler_qt5_SRCS}
+    ${CMAKE_SOURCE_DIR}/poppler/CairoOutputDev.cc
+    ${CMAKE_SOURCE_DIR}/poppler/CairoRescaleBox.cc
+    ${CMAKE_SOURCE_DIR}/poppler/CairoFontEngine.cc
+  )
+endif(HAVE_CAIRO)
 add_library(poppler-qt5 ${poppler_qt5_SRCS})
 set_target_properties(poppler-qt5 PROPERTIES VERSION 1.13.0 SOVERSION 1)
 if(MINGW)
@@ -36,6 +48,9 @@ if(MINGW)
     set_target_properties(poppler-qt5 PROPERTIES SUFFIX "-${POPPLER_QT5_SOVERSION}${CMAKE_SHARED_LIBRARY_SUFFIX}")
 endif()
 target_link_libraries(poppler-qt5 poppler ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Xml_LIBRARIES})
+if (HAVE_CAIRO)
+  target_link_libraries(poppler-qt5 ${CAIRO_LIBRARIES})
+endif (HAVE_CAIRO)
 if(MSVC)
 target_link_libraries(poppler-qt5 poppler ${poppler_LIBS})
 endif()

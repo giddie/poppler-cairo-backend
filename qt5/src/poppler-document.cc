@@ -672,6 +672,9 @@ namespace Poppler {
         ret << Document::SplashBackend;
 #endif
         ret << Document::ArthurBackend;
+#if defined(HAVE_CAIRO)
+        ret << Document::CairoBackend;
+#endif
         return ret;
     }
 
