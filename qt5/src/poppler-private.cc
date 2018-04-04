@@ -247,7 +247,7 @@ DocumentData::~DocumentData()
 
 void DocumentData::init()
 {
-    m_backend = Document::SplashBackend;
+    m_backend = Document::CairoBackend;
     paperColor = Qt::white;
     m_hints = 0;
     m_optContentModel = nullptr;
