@@ -45,6 +45,7 @@
 #include <QtGui/QPainter>
 
 #include <config.h>
+#include <math.h>
 #include <PDFDoc.h>
 #include <Catalog.h>
 #include <Form.h>
@@ -57,6 +58,9 @@
 #if defined(HAVE_SPLASH)
 #include <SplashOutputDev.h>
 #include <splash/SplashBitmap.h>
+#endif
+#if defined(HAVE_CAIRO)
+#include <CairoOutputDev.h>
 #endif
 
 #include "poppler-private.h"
@@ -596,6 +600,70 @@ QImage Page::renderToImage(double xres, double yres, int x, int y, int w, int h,
       img = tmpimg;
       break;
     }
+    case Poppler::Document::CairoBackend:
+    {
+#if defined(HAVE_CAIRO)
+      CairoOutputDev *output_dev = new CairoOutputDev();
+      output_dev->startDoc(m_page->parentDoc->doc);
+      int buffer_width, buffer_height, rotate;
+      cairo_surface_t *surface;
+      cairo_t *cairo;
+
+      // If w or h are -1, that indicates the whole page, so we need to
+      // calculate how many pixels that corresponds to.  Otherwise, we can use w
+      // or h directly for our buffer size.
+      const QSize pageSize = this->pageSize();
+      if (w == -1) {
+        const double xscale = xres / 72.0;
+        const double width = pageSize.width();;
+        buffer_width = (int) ceil(width * xscale);
+      } else {
+        buffer_width = w;
+      }
+      if (h == -1) {
+        const double yscale = yres / 72.0;
+        const double height = pageSize.height();
+        buffer_height = (int) ceil(height * yscale);
+      } else {
+        buffer_height = h;
+      }
+
+      rotate = rotation + m_page->page->getRotate();
+
+      // FIXME: Okular never provides a rotation value, so I don't have any way
+      // of testing this right now.  The result is that subpixels are ordered
+      // incorrectly when the page is rotated.
+
+      //if (rotate == 90 || rotate == 270) {
+      //  const double temp = height;
+      //  height = width;
+      //  width = temp;
+      //}
+
+      img = QImage(buffer_width, buffer_height, QImage::Format_ARGB32);
+      img.fill(Qt::white);  // Never transparent
+
+      surface = cairo_image_surface_create_for_data(
+                  img.bits(),
+                  CAIRO_FORMAT_ARGB32,
+                  buffer_width, buffer_height,
+                  img.bytesPerLine());
+
+      cairo = cairo_create(surface);
+      output_dev->setCairo(cairo);
+
+      m_page->parentDoc->doc->displayPageSlice(
+        output_dev, m_page->index + 1, xres, yres, rotation, false, true,
+        false, x, y, w, h);
+
+      // Clean up
+      output_dev->setCairo(NULL);
+      cairo_destroy(cairo);
+      cairo_surface_destroy(surface);
+      delete output_dev;
+#endif
+      break;
+    }
   }
 
   if (shouldAbortRenderCallback && shouldAbortRenderCallback(payload))
@@ -618,6 +686,8 @@ bool Page::renderToPainter(QPainter* painter, double xres, double yres, int x, i
         QImageDumpingArthurOutputDev arthur_output(painter, nullptr);
         return renderToArthur(&arthur_output, painter, m_page, xres, yres, x, y, w, h, rotate, flags);
     }
+    case Poppler::Document::CairoBackend:
+      return false;
   }
   return false;
 }
