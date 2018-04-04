@@ -697,6 +697,9 @@ QSet<Document::RenderBackend> Document::availableRenderBackends()
 #endif
     ret << Document::QPainterBackend;
     ret << Document::ArthurBackend; // For backward compatibility
+#if defined(HAVE_CAIRO)
+    ret << Document::CairoBackend;
+#endif
     return ret;
 }
 

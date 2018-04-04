@@ -5,6 +5,11 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+if (HAVE_CAIRO)
+  include_directories(${CAIRO_INCLUDE_DIRS})
+  add_definitions(${CAIRO_CFLAGS})
+endif (HAVE_CAIRO)
+
 set(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
@@ -36,6 +41,13 @@ set(poppler_qt5_SRCS
   QPainterOutputDev.cc
   poppler-version.cpp
 )
+if (HAVE_CAIRO)
+  set(poppler_qt5_SRCS ${poppler_qt5_SRCS}
+    ${CMAKE_SOURCE_DIR}/poppler/CairoOutputDev.cc
+    ${CMAKE_SOURCE_DIR}/poppler/CairoRescaleBox.cc
+    ${CMAKE_SOURCE_DIR}/poppler/CairoFontEngine.cc
+  )
+endif(HAVE_CAIRO)
 add_library(poppler-qt5 ${poppler_qt5_SRCS})
 generate_export_header(poppler-qt5 BASE_NAME poppler-qt5 EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/poppler-export.h")
 set_target_properties(poppler-qt5 PROPERTIES VERSION 1.29.0 SOVERSION 1)
@@ -44,6 +56,9 @@ if(MINGW AND BUILD_SHARED_LIBS)
     set_target_properties(poppler-qt5 PROPERTIES SUFFIX "-${POPPLER_QT5_SOVERSION}${CMAKE_SHARED_LIBRARY_SUFFIX}")
 endif()
 target_link_libraries(poppler-qt5 poppler Qt5::Core Qt5::Gui Qt5::Xml ${FREETYPE_LIBRARIES})
+if (HAVE_CAIRO)
+  target_link_libraries(poppler-qt5 ${CAIRO_LIBRARIES})
+endif (HAVE_CAIRO)
 if(MSVC)
 target_link_libraries(poppler-qt5 poppler ${poppler_LIBS})
 endif()
