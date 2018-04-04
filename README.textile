@@ -1,22 +1,22 @@
 h1. Definitions
 
-* *Wrapper:* A set of bindings to make using the Poppler library easier for a given toolkit.  For instance, Okular uses the Qt4 wrapper, and Evince uses the Glib wrapper.
+* *Wrapper:* A set of bindings to make using the Poppler library easier for a given toolkit.  For instance, Okular uses the Qt5 wrapper, and Evince uses the Glib wrapper.
 * *Backend:* An implementation that actually performs the rendering of the PDF.  Currently, there are two complete backends in Poppler:
 ** *Splash:* a low-level backend inherited from Xpdf.  This code is getting old now, and it's difficult to introduce major changes (such as introducing subpixel rendering).
 ** *Cairo:* performs all its rendering using the Cairo library.  This is where most of the interesting development is happening now.
 
 h1. Purpose of this Patchset
 
-Currently, the default backend for the Qt4 wrapper (used by Okular) is Splash.  Unfortunately, Splash does not support subpixel rendering of fonts, so those of us using KDE are stuck with somewhat ugly-looking fonts.  This patchset adds support for the Cairo backend to the Qt4 wrapper.  It also forces subpixel rendering in the Cairo backend.  The upshot of this is that we get beautiful fonts in Okular.
+Currently, the default backend for the Qt5 wrapper (used by Okular) is Splash.  Unfortunately, Splash does not support subpixel rendering of fonts, so those of us using KDE are stuck with somewhat ugly-looking fonts.  This patchset adds support for the Cairo backend to the Qt5 wrapper.  It also forces subpixel rendering in the Cairo backend.  The upshot of this is that we get beautiful fonts in Okular.
 
-- Before := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/before.png!
-- After := !http://cloud.github.com/downloads/giddie/poppler-qt4-cairo-backend/after.png!
+- Before := !http://cloud.github.com/downloads/giddie/poppler-cairo-backend/before.png!
+- After := !http://cloud.github.com/downloads/giddie/poppler-cairo-backend/after.png!
 
 h1. Why isn't this is Poppler already?
 
-The Poppler developers feel that the introduction of a dependency on Cairo to the Qt4 wrapper (even an optional dependency) is politically controversial, and are not willing to merge it.  For those of us who already have Cairo installed (e.g. for Firefox, Inkscape, Scribus, etc...), and are more worried about beautiful PDFs than toolkit politics, this patchset is here for us :)  If you'd like to join the effort in convincing the developers that this is worthwhile, feel free to wade in on "the Bugzilla report":https://bugs.freedesktop.org/show_bug.cgi?id=25240.
+The Poppler developers feel that the introduction of a dependency on Cairo to the Qt5 wrapper (even an optional dependency) is politically controversial, and are not willing to merge it.  For those of us who already have Cairo installed (e.g. for Firefox, Inkscape, Scribus, etc...), and are more worried about beautiful PDFs than toolkit politics, this patchset is here for us :)  If you'd like to join the effort in convincing the developers that this is worthwhile, feel free to wade in on "the Bugzilla report":https://bugs.freedesktop.org/show_bug.cgi?id=25240.
 
-There is a partly-implemented backend available in Poppler that uses Arthur, the Qt4 2D rendering interface.  Sadly, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend might be a more elegant, long-term Qt-only solution, if it were completed.
+There is a partly-implemented backend available in Poppler that uses Arthur, the Qt5 2D rendering interface.  Sadly, it is nowhere near complete, and at the time of writing I'm not aware of anyone working on it.  This patchset is a "quick fix" for the problem of font rendering in Okular.  The Arthur backend might be a more elegant, long-term Qt-only solution, if it were completed.
 
 h1. Organisation of this Repository
 
@@ -24,7 +24,7 @@ This repository tracks the official Poppler repository (git://git.freedesktop.or
 
 - patchset := Contains a set of patch files that may be applied to the current Poppler release.  This branch does not share any ancestor with the Poppler source and is here to provide easy access to the patch files.
 - maint := Follows the maintenance branch (e.g. poppler-0.12), from which maintenance releases are tagged (e.g. poppler-0.12.1).
-- qt4-lcd := Qt4-Cairo patchset applied on top of maint.  This branch is rebased on top of maint whenever a new Poppler release is tagged.
+- qt-lcd := Qt-Cairo patchset applied on top of maint.  This branch is rebased on top of maint whenever a new Poppler release is tagged.
 
 h1. Autotools / CMake
 
@@ -41,12 +41,12 @@ h1. How can I generate my own patch files?
 
 # Clone the repository:
 
-bc. git clone git://github.com/giddie/poppler-qt4-cairo-backend.git
+bc. git clone git://github.com/giddie/poppler-cairo-backend.git
 
-#2 Change into the directory and checkout the the *qt4-lcd* branch, which tracks Poppler's actual releases:
+#2 Change into the directory and checkout the the *qt-lcd* branch, which tracks Poppler's actual releases:
 
-bc. cd poppler-qt4-cairo-backend
-git checkout -b qt4-lcd origin/qt4-lcd
+bc. cd poppler-qt-cairo-backend
+git checkout -b qt-lcd origin/qt-lcd
 
 #3 Generate patch files for all the commits between *maint* and the tip of the current branch:
 
