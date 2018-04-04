@@ -7,6 +7,11 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/../src
 )
 
+if (HAVE_CAIRO)
+  include_directories(${CAIRO_INCLUDE_DIRS})
+  add_definitions(${CAIRO_CFLAGS})
+endif (HAVE_CAIRO)
+
 macro(QT5_ADD_SIMPLETEST exe source)
   string(REPLACE "-" "" test_name ${exe})
   set(${test_name}_SOURCES
